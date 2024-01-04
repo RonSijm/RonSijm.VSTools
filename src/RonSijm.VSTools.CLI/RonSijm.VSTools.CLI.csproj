@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>FixPaths</ToolCommandName>
+		<OutputType>Exe</OutputType>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Build" Version="17.8.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RonSijm.VSTools.Lib\RonSijm.VSTools.Lib.csproj" />
+	</ItemGroup>
+
+</Project>
