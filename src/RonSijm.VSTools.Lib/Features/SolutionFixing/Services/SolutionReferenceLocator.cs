@@ -25,6 +25,7 @@ public class SolutionReferenceLocator
             {
                 if (project.ProjectType == SolutionProjectType.SolutionFolder)
                 {
+                    // ReSharper disable once RedundantJumpStatement - Justification: Used for debugging later.
                     continue;
                 }
                 else if (project.ProjectType == SolutionProjectType.KnownToBeMSBuildFormat)

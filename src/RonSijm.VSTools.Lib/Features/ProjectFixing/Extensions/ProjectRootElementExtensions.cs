@@ -1,10 +1,11 @@
 ﻿using Microsoft.Build.Construction;
+using RonSijm.VSTools.Lib.Features.ProjectFixing.Abstractions;
 
 namespace RonSijm.VSTools.Lib.Features.ProjectFixing.Extensions;
 
 public static class ProjectRootElementExtensions
 {
-    public static IEnumerable<ProjectItemElement> GetReferencedProjects(this ProjectRootElement project)
+    public static IEnumerable<ItemReference> GetReferencedProjects(this ProjectRootElement project)
     {
         foreach (var itemGroupElement in project.ItemGroups)
         {
@@ -20,6 +21,14 @@ public static class ProjectRootElementExtensions
                     yield return projectItemElement;
                 }
             }
+        }
+    }
+
+    public static IEnumerable<ItemReference> GetIncludes(this ProjectRootElement project)
+    {
+        foreach (var itemGroupElement in project.Imports)
+        {
+            yield return itemGroupElement;
         }
     }
 }

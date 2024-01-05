@@ -1,4 +1,6 @@
-﻿namespace RonSijm.VSTools.Sample.Lib1;
+﻿using RonSijm.VSTools.Sample.Lib5;
+
+namespace RonSijm.VSTools.Sample.Lib4;
 
 public static class OutWriter4
 {

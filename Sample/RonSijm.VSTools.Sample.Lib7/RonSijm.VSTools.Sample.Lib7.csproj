@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../SharedConfig.props" />
 
-  <PropertyGroup>
-	  <TargetFramework>net8.0</TargetFramework>
-	  <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\RonSijm.VSTools.Sample.Lib8\RonSijm.VSTools.Sample.Lib8.csproj" />
-    <ProjectReference Include="..\RonSijm.VSTools.Sample.Lib9\RonSijm.VSTools.Sample.Lib9.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\RonSijm.VSTools.Sample.Lib8\RonSijm.VSTools.Sample.Lib8.csproj" />
+		<ProjectReference Include="..\RonSijm.VSTools.Sample.Lib9\RonSijm.VSTools.Sample.Lib9.csproj" />
+	</ItemGroup>
 
 </Project>

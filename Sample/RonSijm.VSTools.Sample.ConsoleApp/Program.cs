@@ -1,15 +1,16 @@
 ﻿using RonSijm.VSTools.Sample.Lib1;
+using RonSijm.VSTools.Sample.Lib2;
+using RonSijm.VSTools.Sample.Lib4;
 
-namespace RonSijm.Sample.ConsoleApp
+namespace RonSijm.VSTools.Sample.ConsoleApp;
+
+internal class Program
 {
-    internal class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World from Program!");
-            OutWriter1.Write();
-            OutWriter2.Write();
-            OutWriter4.Write();
-        }
+        Console.WriteLine("Hello, World from Program!");
+        OutWriter1.Write();
+        OutWriter2.Write();
+        OutWriter4.Write();
     }
 }
