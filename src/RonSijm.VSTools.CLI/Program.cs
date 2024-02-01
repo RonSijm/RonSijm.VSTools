@@ -1,18 +1,14 @@
-﻿using RonSijm.VSTools.Lib.Features;
+﻿namespace RonSijm.VSTools.CLI;
 
-namespace RonSijm.VSTools.CLI;
-
-internal class Program
+public class Program
 {
-    static void Main()
+    public static void Main(string[] args)
     {
-        // Directory with .sln or .csproj files to actually inspect
-        var directoriesToInspect = new List<string> { "C:\\Dev\\Personal\\RonSijm.VSTools\\Sample" };
+        ProgramSettings.ProgramFileExtension.CreateFileExtensionAssociation("VSTools", "Tool to Automatically fix VS Paths", $"--{nameof(CLIOptionsModel.OptionsFile)} \"%1\"");
 
-        // Directory with additional .csproj files to use as references
-        var projectReferences = new List<string> { "C:\\Dev\\Personal\\RonSijm.VSTools\\src" };
+        var serviceProvider = ServiceProviderFactory.BuildServiceProvider();
 
-        var referenceFixerCore = new ReferenceFixerCore();
-        referenceFixerCore.Fix(directoriesToInspect, projectReferences);
+        var program = serviceProvider.GetRequiredService<CLICore>();
+        program.Start(args);
     }
 }

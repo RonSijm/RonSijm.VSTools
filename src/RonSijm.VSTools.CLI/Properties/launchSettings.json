@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RonSijm.VSTools.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "--OptionsFile C:\\Dev\\Personal\\RonSijm.VSTools\\Sample\\ProjectSettings.VSToolSettings --Mode CreateReferences"
+    }
+  }
+}

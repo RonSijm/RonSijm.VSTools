@@ -170,3 +170,6 @@ $RECYCLE.BIN/
 
 # Rider Files
 .idea/
+
+# Compiled nuget files
+/nupkg/*.nupkg

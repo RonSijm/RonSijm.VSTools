@@ -1,0 +1,13 @@
+{
+  "Serilog": {
+    "MinimumLevel": "Verbose",
+    "Using": [
+      "Serilog.Sinks.Console"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Console"
+      }
+    ]
+  }
+}

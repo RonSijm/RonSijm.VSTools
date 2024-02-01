@@ -1,4 +1,5 @@
-﻿using RonSijm.VSTools.Sample.Lib3;
+﻿using System;
+using RonSijm.VSTools.Sample.Lib3;
 
 namespace RonSijm.VSTools.Sample.Lib2;
 

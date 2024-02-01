@@ -2,19 +2,37 @@
 
 	<PropertyGroup>
 		<PackAsTool>true</PackAsTool>
-		<ToolCommandName>FixPaths</ToolCommandName>
+		<ToolCommandName>dotnet-fixreferences</ToolCommandName>
 		<OutputType>Exe</OutputType>
-		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<PackageOutputPath>./../../nupkg</PackageOutputPath>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>RonSijm.VSTools.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Include="RonSijm.VSTools.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommandLineParser" Version="2.9.1" />
 		<PackageReference Include="Microsoft.Build" Version="17.8.3" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\RonSijm.VSTools.Lib\RonSijm.VSTools.Lib.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="VSTools.appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

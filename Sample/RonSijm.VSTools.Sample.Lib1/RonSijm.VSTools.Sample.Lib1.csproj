@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../SharedConfig.props" />
-
-	<PropertyGroup>
-		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
-
+  <Import Project="..\SharedConfig.props" />
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <ProjectReferenceId>ExistingReferenceId</ProjectReferenceId>
+  </PropertyGroup>
 </Project>

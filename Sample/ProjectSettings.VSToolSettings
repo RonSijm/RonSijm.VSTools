@@ -1,0 +1,7 @@
+{
+  "directoriesToInspect": [
+    "C:\\Dev\\Personal\\RonSijm.VSTools\\Sample"
+  ],
+  "doColdRun": false,
+  "fixMode": "RunScan"
+}
