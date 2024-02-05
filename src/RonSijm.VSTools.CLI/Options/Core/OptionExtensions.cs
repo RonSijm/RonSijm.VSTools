@@ -1,5 +1,4 @@
 ﻿using RonSijm.VSTools.Lib.Features.Core.Options;
-using RonSijm.VSTools.Lib.Features.Core.Options.Models;
 
 namespace RonSijm.VSTools.CLI.Options.Core;
 

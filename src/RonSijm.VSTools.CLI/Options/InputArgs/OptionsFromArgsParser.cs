@@ -1,6 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-
-namespace RonSijm.VSTools.CLI.Options.InputArgs;
+﻿namespace RonSijm.VSTools.CLI.Options.InputArgs;
 
 public class OptionsFromArgsParser(ILogger<OptionsFromArgsParser> logger)
 {
@@ -42,7 +40,7 @@ public class OptionsFromArgsParser(ILogger<OptionsFromArgsParser> logger)
             return new ParsedCLIOptionsModel { DirectoriesToInspect = [workingDirectory] };
         }
 
-        var settingsFiles = Directory.GetFiles(workingDirectory, "*.VSToolSettings", SearchOption.TopDirectoryOnly);
+        var settingsFiles = Directory.GetFiles(workingDirectory, "*.VSToolSettings", System.IO.SearchOption.TopDirectoryOnly);
 
         if (settingsFiles.Length == 0)
         {

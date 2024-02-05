@@ -1,8 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.CreateReferences.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
-
-namespace RonSijm.VSTools.Lib.Features.Core;
+﻿namespace RonSijm.VSTools.Lib.Features.Core;
 
 public class VSToolResult
 {

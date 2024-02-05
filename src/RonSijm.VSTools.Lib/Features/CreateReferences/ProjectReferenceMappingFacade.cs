@@ -1,9 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core;
-using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
-
-namespace RonSijm.VSTools.Lib.Features.CreateReferences;
+﻿namespace RonSijm.VSTools.Lib.Features.CreateReferences;
 
 public class ProjectReferenceMappingFacade(ILogger<ProjectReferenceMappingFacade> logger) : ICoreFunction
 {
@@ -13,8 +8,8 @@ public class ProjectReferenceMappingFacade(ILogger<ProjectReferenceMappingFacade
     {
         var result = new VSToolResult();
 
-        var projectLoader = new ProjectLoader();
-        var loadedProjects = projectLoader.LoadProjects(options.DirectoriesToInspect);
+        var projectLoader = new ProjectFileLoader();
+        var loadedProjects = projectLoader.OpenProjects(options.DirectoriesToInspect);
 
         var projectReferenceLocator = new ProjectFromSolutionLocator();
         var projectReferences = projectReferenceLocator.GetProjectReferences(loadedProjects);

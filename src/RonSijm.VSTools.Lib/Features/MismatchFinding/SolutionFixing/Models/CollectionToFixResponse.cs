@@ -1,6 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
 
 public class CollectionToFixResponse : List<SolutionToFixModel>, IFixable
 {
@@ -12,7 +10,7 @@ public class CollectionToFixResponse : List<SolutionToFixModel>, IFixable
 
             foreach (var project in solutionToFixModel.ItemsToFix)
             {
-                solutionAsText = solutionAsText.Replace($"\"{project.Reference.Path}\"", $"\"{project.ExpectedPath}\"");
+                solutionAsText = solutionAsText.Replace($"\"{project.CurrentItemValue}\"", $"\"{project.ExpectedItemValue}\"");
             }
 
             File.WriteAllText(solutionToFixModel.File, solutionAsText);

@@ -1,6 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-
-namespace RonSijm.VSTools.CLI.Options.InputArgs.Models;
+﻿namespace RonSijm.VSTools.CLI.Options.InputArgs.Models;
 
 public class CLIOptionsModel
 {
@@ -18,6 +16,9 @@ public class CLIOptionsModel
 
     [Option('m', nameof(Mode), Required = false, HelpText = $"Indicate the mode in which to run.\n\r - '{nameof(ModeEnum.CreateReferences)}' - Creates a configuration for the current projects, and adds a ReferenceId to the projects. \n\r - '{nameof(ModeEnum.FindMismatches)}' - A mode to actually run a scan for all the missing references.")]
     public ModeEnum? Mode { get; set; } = ModeEnum.FindMismatches;
+
+    [Option('f', nameof(FolderFixMode), Required = false, HelpText = $"Indicate the mode in how to fix folders being different than their project name.\n\r - '{nameof(FolderFixModeEnum.DoNothing)}' - Indicates to leave things as-is. \n\r - '{nameof(FolderFixModeEnum.RenameProject)}' - Indicates to rename the Project file to match the Folder name.\n\r - '{nameof(FolderFixModeEnum.RenameFolder)}' - Indicates to rename the Folder to match the Project file name.")]
+    public FolderFixModeEnum? FolderFixMode { get; set; } = FolderFixModeEnum.DoNothing;
 
     [Option('o', nameof(OptionsFile), Required = false, HelpText = "Options file to use.")]
     public string OptionsFile { get; set; }

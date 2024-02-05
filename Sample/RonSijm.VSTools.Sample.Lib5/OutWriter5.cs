@@ -11,4 +11,6 @@ public static class OutWriter5
         OutWriter6.Write();
         OutWriter7.Write();
     }
+
+    public static bool ShouldWrite => true;
 }

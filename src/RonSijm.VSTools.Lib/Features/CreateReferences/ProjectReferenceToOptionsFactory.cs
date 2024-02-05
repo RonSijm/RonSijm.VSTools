@@ -1,7 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-using RonSijm.VSTools.Lib.Features.CreateReferences.Models;
-
-namespace RonSijm.VSTools.Lib.Features.CreateReferences;
+﻿namespace RonSijm.VSTools.Lib.Features.CreateReferences;
 
 public class ProjectReferenceToOptionsFactory
 {

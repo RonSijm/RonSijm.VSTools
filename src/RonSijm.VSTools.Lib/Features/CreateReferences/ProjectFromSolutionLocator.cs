@@ -1,7 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.CreateReferences.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
-
-namespace RonSijm.VSTools.Lib.Features.CreateReferences;
+﻿namespace RonSijm.VSTools.Lib.Features.CreateReferences;
 
 public class ProjectFromSolutionLocator
 {

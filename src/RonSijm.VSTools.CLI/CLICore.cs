@@ -1,6 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core;
-
-namespace RonSijm.VSTools.CLI;
+﻿namespace RonSijm.VSTools.CLI;
 
 public class CLICore(ILogger<CLICore> logger, OptionsFromArgsParser optionsParser, OptionsLogger optionsLogger, VSToolFacade vsToolFacade, AfterRunOptionsHelper afterRunOptionsHelper)
 {

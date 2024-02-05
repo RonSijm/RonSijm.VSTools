@@ -1,23 +1,20 @@
-﻿using RonSijm.VSTools.Lib.Features.Core;
-using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-using RonSijm.VSTools.Lib.Features.CreateReferences.Interfaces;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
 
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
-
-public class ProjectFileLoader(IEnumerable<IReferenceLoadingDecorator> referenceLoadingDecorator)
+public class ProjectFileLoader
 {
-    public ProjectFileContainer GetProjectFiles(CoreOptionsRequest options)
+    public List<ProjectRootElement> OpenProjects(List<string> directoriesToInspect)
     {
-        var allProjectReferences = new ProjectFileContainer();
-        FileLocator.FindFiles("*.csproj", options.ProjectReferences, allProjectReferences);
-        FileLocator.FindFiles("*.csproj", options.DirectoriesToInspect, allProjectReferences);
+        var projectsToFix = new List<FileModel>();
+        FileLocator.FindFiles("*.csproj", directoriesToInspect, projectsToFix);
 
-        foreach (var loadingDecorator in referenceLoadingDecorator)
+        var loadedProjects = new List<ProjectRootElement>();
+
+        foreach (var project in projectsToFix)
         {
-            loadingDecorator.LoadReferences(options, allProjectReferences);
+            var projectRootElement = ProjectRootElement.Open(project.FileName);
+            loadedProjects.Add(projectRootElement);
         }
 
-        return allProjectReferences;
+        return loadedProjects;
     }
 }

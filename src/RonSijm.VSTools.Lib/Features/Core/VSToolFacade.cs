@@ -1,7 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding;
-
-namespace RonSijm.VSTools.Lib.Features.Core;
+﻿namespace RonSijm.VSTools.Lib.Features.Core;
 
 public class VSToolFacade(ILogger<VSToolFacade> logger, IEnumerable<ICoreFunction> coreFunctions)
 {

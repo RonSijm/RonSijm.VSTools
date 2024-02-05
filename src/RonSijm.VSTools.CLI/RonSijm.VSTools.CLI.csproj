@@ -6,8 +6,9 @@
 		<OutputType>Exe</OutputType>
 		<PackageOutputPath>./../../nupkg</PackageOutputPath>
 		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<ImplicitUsings>disable</ImplicitUsings>
 		<ApplicationIcon>RonSijm.VSTools.ico</ApplicationIcon>
+		<Version>1.1.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -23,6 +24,7 @@
 		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="System.IO.Abstractions" Version="20.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>

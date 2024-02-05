@@ -1,7 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-using RonSijm.VSTools.Lib.Features.CreateReferences.Models;
-
-namespace RonSijm.VSTools.CLI.Options.InputArgs.Models;
+﻿namespace RonSijm.VSTools.CLI.Options.InputArgs.Models;
 
 public class ParsedCLIOptionsModel
 {
@@ -28,4 +25,6 @@ public class ParsedCLIOptionsModel
     /// A list of project references by their Ids, as created by the 
     /// </summary>
     public List<ProjectReferenceByIdModel> ProjectReferencesById { get; set; }
+
+    public FolderFixModeEnum FolderFixMode { get; set; }
 }

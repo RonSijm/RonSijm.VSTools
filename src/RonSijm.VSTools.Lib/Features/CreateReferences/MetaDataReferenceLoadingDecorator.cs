@@ -1,8 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-using RonSijm.VSTools.Lib.Features.CreateReferences.Interfaces;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
-
-namespace RonSijm.VSTools.Lib.Features.CreateReferences;
+﻿namespace RonSijm.VSTools.Lib.Features.CreateReferences;
 
 // ReSharper disable once UnusedType.Global - Used by DI
 public class MetaDataReferenceLoadingDecorator : IReferenceLoadingDecorator
@@ -11,7 +7,7 @@ public class MetaDataReferenceLoadingDecorator : IReferenceLoadingDecorator
     {
         foreach (var allProjectReference in allProjectReferences)
         {
-            var projectRootElement = ProjectRootElement.Open(allProjectReference.File);
+            var projectRootElement = ProjectRootElement.Open(allProjectReference.FileName);
 
             if (projectRootElement == null)
             {

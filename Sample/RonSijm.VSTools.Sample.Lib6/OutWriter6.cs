@@ -1,8 +1,8 @@
 ﻿namespace RonSijm.VSTools.Sample.Lib6;
 
-public static class OutWriter6
+internal static class OutWriter6
 {
-    public static void Write()
+    internal static void Write()
     {
         Console.WriteLine("Hello from Lib6");
     }

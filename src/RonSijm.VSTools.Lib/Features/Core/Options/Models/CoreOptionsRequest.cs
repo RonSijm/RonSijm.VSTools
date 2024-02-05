@@ -1,6 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.CreateReferences.Models;
-
-namespace RonSijm.VSTools.Lib.Features.Core.Options.Models;
+﻿namespace RonSijm.VSTools.Lib.Features.Core.Options.Models;
 
 public class CoreOptionsRequest
 {
@@ -25,6 +23,13 @@ public class CoreOptionsRequest
     /// <see cref="ModeEnum"/>
     /// </summary>
     public ModeEnum Mode { get; set; } = ModeEnum.FindMismatches;
+
+
+    /// <summary>
+    /// Indicate how to fix folders.
+    /// <see cref="FolderFixModeEnum"/>
+    /// </summary>
+    public FolderFixModeEnum FolderFixMode { get; set; } = FolderFixModeEnum.DoNothing;
 
     /// <summary>
     /// A list of project references by their Ids, as created by the 

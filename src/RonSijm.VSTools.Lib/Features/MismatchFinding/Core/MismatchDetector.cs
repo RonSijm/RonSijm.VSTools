@@ -1,11 +1,8 @@
-﻿using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Abstractions;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.Core;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.Core;
 
 public class MismatchDetector
 {
-    public OneOf<ErrorWhileMatchingResult, ItemToFixResult>? FindMismatch(ProjectFileContainer projectReferences, string projectPath, ItemReference reference)
+    public OneOf<ErrorWhileMatchingResult, ProjectInProjectToFixResult>? FindMismatch(ProjectFileContainer projectReferences, string projectPath, ItemReference reference)
     {
         var fileName = Path.GetFileName(reference.Path);
 
@@ -36,13 +33,13 @@ public class MismatchDetector
 
         if (reference.Path != expectedPath)
         {
-            var itemToFix = new ItemToFixResult
+            var itemToFix = new ProjectInProjectToFixResult
             {
-                ExpectedPath = expectedPath,
+                ExpectedItemValue = expectedPath,
                 Reference = reference,
-                AbsoluteExpectedItemPath = actualPath,
-                AbsoluteCurrentItemPath = currentPath,
-                AbsoluteProjectPath = projectPath
+                ExpectedItemDisplayValue = actualPath,
+                CurrentItemValue = reference.Path,
+                CurrentItemDisplayValue = projectPath
             };
 
             return itemToFix;

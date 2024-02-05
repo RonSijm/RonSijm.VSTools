@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\SharedConfig.props" />
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RonSijm.VSTools.Sample.Lib13.Project.Models.Lib13-1\RonSijm.VSTools.Sample.Lib13.Project.Models.Lib13-1.csproj" />
+    <ProjectReference Include="..\RonSijm.VSTools.Sample.Lib13.Project.Models.Lib13-2\RonSijm.VSTools.Sample.Lib13.Project.Models.Lib13-2.csproj" />
+  </ItemGroup>
+</Project>

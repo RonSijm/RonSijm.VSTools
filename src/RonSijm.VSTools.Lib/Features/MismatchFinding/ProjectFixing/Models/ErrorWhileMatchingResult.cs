@@ -1,6 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Abstractions;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
 
 public class ErrorWhileMatchingResult
 {

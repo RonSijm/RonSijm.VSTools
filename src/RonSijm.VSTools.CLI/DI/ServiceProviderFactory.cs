@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using RonSijm.VSTools.Lib.Features.Core;
-
-namespace RonSijm.VSTools.CLI.DI;
+﻿namespace RonSijm.VSTools.CLI.DI;
 
 public static class ServiceProviderFactory
 {

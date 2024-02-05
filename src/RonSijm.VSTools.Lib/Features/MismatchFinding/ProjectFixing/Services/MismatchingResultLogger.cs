@@ -1,7 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
 
 public class MismatchingResultLogger(ILogger<MismatchingResultLogger> logger)
 {
@@ -42,11 +39,11 @@ public class MismatchingResultLogger(ILogger<MismatchingResultLogger> logger)
         {
             if (mentionWhichProject)
             {
-                logger.LogInformation("Project: {AbsoluteProjectPath}", result.AbsoluteProjectPath);
+                logger.LogInformation("Project: {AbsoluteProjectPath}", result.CurrentItemDisplayValue);
             }
             
-            logger.LogInformation("Has Reference: {AbsoluteCurrentItemPath}", result.AbsoluteCurrentItemPath);
-            logger.LogInformation("Should Be Reference: {AbsoluteExpectedItemPath}", result.AbsoluteExpectedItemPath);
+            logger.LogInformation("Has Reference:       {AbsoluteCurrentItemPath}", result.CurrentItemValue);
+            logger.LogInformation("Should Be Reference: {AbsoluteExpectedItemPath}", result.ExpectedItemDisplayValue);
         }
 
         if (results.Errors.Count != 0)

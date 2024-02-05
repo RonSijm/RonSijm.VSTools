@@ -6,7 +6,6 @@ public static class ConsoleCleanService
 {
     public static void CleanConsole(this ILogger logger)
     {
-        Console.Clear();
         logger.LogTrace("");
         logger.LogTrace("██████╗  ██████╗ ███╗   ██╗███████╗██╗     ██╗███╗   ███╗       ");
         logger.LogTrace("██╔══██╗██╔═══██╗████╗  ██║██╔════╝██║     ██║████╗ ████║       ");

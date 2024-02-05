@@ -1,12 +1,12 @@
 ﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
 
-public class ProjectFileContainer : List<ProjectFileModel>
+public class ProjectFileContainer : List<FileModel>
 {
     public List<string> FindProject(string fileName)
     {
         var referencePaths = this.Where(referencePath =>
         {
-            var referenceFileName = Path.GetFileName(referencePath.File);
+            var referenceFileName = Path.GetFileName(referencePath.FileName);
 
             if (referenceFileName == null)
             {
@@ -27,7 +27,7 @@ public class ProjectFileContainer : List<ProjectFileModel>
                 return false;
             }
 
-            var newFileName = Path.GetFileName(referencePath.File);
+            var newFileName = Path.GetFileName(referencePath.FileName);
 
             if (!referencePath.OtherNames.Any(x => x.Equals(newFileName)))
             {
@@ -37,6 +37,6 @@ public class ProjectFileContainer : List<ProjectFileModel>
             return true;
         }).ToList();
 
-        return referencePaths.Select(x => x.File).ToList();
+        return referencePaths.Select(x => x.FileName).ToList();
     }
 }

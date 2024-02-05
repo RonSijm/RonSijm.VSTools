@@ -1,24 +1,18 @@
-﻿using RonSijm.VSTools.Lib.Features.Core;
-using RonSijm.VSTools.Lib.Features.Core.Options.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.Core;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Abstractions;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Extensions;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
 
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
-
-public class ProjectMismatchLocator(ProjectFileLoader projectFileLoader, MismatchDetector mismatchDetector) : IMismatchLocator
+public class ProjectMismatchLocator(ProjectReferenceLoader projectReferenceLoader, MismatchDetector mismatchDetector) : IMismatchLocator
 {
+    public ushort Order => 2;
+
     /// <inheritdoc />
     public OneOf<ItemsToFixResponse, CollectionToFixResponse> GetMismatches(CoreOptionsRequest options)
     {
-        var result = new ProjectsToFixResponse();
+        var result = new ItemsToFixResponse();
 
-        var projectLoader = new ProjectLoader();
-        var loadedProjects = projectLoader.LoadProjects(options.DirectoriesToInspect);
+        var projectLoader = new ProjectFileLoader();
+        var loadedProjects = projectLoader.OpenProjects(options.DirectoriesToInspect);
 
-        var projectContainer = projectFileLoader.GetProjectFiles(options);
+        var projectContainer = projectReferenceLoader.GetProjectReferences(options);
 
         foreach (var projectRootElement in loadedProjects)
         {
