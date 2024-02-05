@@ -25,3 +25,6 @@ move RonSijm.VSTools.Sample.Lib13.Project.Models.Lib13-1 RonSijm.VSTools.Lib13Re
 move RonSijm.VSTools.Sample.Lib13.Project.Models.Lib13-2 RonSijm.VSTools.Lib13Renamed.Project.Lib-2
 
 move RonSijm.VSTools.Sample.Lib14 Lib14Renamed
+
+move RonSijm.VSTools.Sample.Lib14 Lib14Renamed.Core
+move RonSijm.VSTools.Sample.Models.Lib15 Models.Lib14Renamed

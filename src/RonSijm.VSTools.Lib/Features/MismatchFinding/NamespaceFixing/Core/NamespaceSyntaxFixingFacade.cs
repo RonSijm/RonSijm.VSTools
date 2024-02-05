@@ -6,10 +6,14 @@ namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.Core;
 public class NamespaceSyntaxFixingFacade(ProjectReferenceLoader projectReferenceLoader, NamespaceValidator namespaceValidator, RoslynSyntaxFixingFacade roslynSyntaxFixingFacade) : IMismatchLocator
 {
     public ushort Order => 4;
-    public OneOf<ItemsToFixResponse, CollectionToFixResponse> GetMismatches(CoreOptionsRequest options)
+    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
     {
         var projectReferences = projectReferenceLoader.GetProjectReferences(options);
-        var loadedProjects = projectReferences.Select(projectMetadata => new ProjectWithFilesLoadedModel { ProjectRoot = ProjectRootElement.Open(projectMetadata.FileName) }).ToModel();
+        var loadedProjects = projectReferences.Select(projectMetadata => new ProjectWithFilesLoadedModel
+        {
+            ProjectRoot = ProjectRootElement.Open(projectMetadata.FileName),
+            OtherNames = projectMetadata.OtherNames,
+        }).ToModel();
 
         var allRenamedNamespaces = namespaceValidator.CheckNamespaces(loadedProjects);
 

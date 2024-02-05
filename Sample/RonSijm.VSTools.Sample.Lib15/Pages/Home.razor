@@ -1,0 +1,19 @@
+﻿@page "/"
+@using RonSijm.VSTools.Sample.Models.Lib15.InFolder
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@* ReSharper disable CSharpWarnings::CS8618 *@
+@* ReSharper disable RedundantNameQualifier *@
+@code{
+
+    public ModelInLib15 Model { get; set; }
+    public RonSijm.VSTools.Sample.Models.Lib15.ModelInLib15 Model2 { get; set; }
+
+    public ModelInLib15InFolder ModelInFolder { get; set; }
+
+}

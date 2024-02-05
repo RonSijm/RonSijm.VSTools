@@ -5,7 +5,7 @@ public class ProjectFileLoader
     public List<ProjectRootElement> OpenProjects(List<string> directoriesToInspect)
     {
         var projectsToFix = new List<FileModel>();
-        FileLocator.FindFiles("*.csproj", directoriesToInspect, projectsToFix);
+        FileLocator.FindFilesWithoutBinFolder("*.csproj", directoriesToInspect, projectsToFix);
 
         var loadedProjects = new List<ProjectRootElement>();
 

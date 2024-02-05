@@ -2,7 +2,7 @@
 
 public class MismatchingResultLogger(ILogger<MismatchingResultLogger> logger)
 {
-    public void LogProjectResults(OneOf<ItemsToFixResponse, CollectionToFixResponse> results)
+    public void LogProjectResults(OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> results)
     {
         if (results.IsT0)
         {
@@ -14,7 +14,7 @@ public class MismatchingResultLogger(ILogger<MismatchingResultLogger> logger)
         }
     }
 
-    private void LogMultipleResults(CollectionToFixResponse results)
+    private void LogMultipleResults(SolutionsToFixCollectionModel results)
     {
         if (results.Count != 0)
         {

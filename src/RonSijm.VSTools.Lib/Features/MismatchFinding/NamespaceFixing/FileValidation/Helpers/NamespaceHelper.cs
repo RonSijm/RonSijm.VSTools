@@ -2,7 +2,7 @@
 
 public static class NamespaceHelper
 {
-    public static string ToNamespace(this string input)
+    public static string RemoveInvalidNamespaceCharacters(this string input)
     {
         return input?.Replace("-", "_");
     }

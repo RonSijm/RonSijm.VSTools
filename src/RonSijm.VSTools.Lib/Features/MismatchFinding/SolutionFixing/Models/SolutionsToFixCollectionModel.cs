@@ -1,6 +1,6 @@
 ﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
 
-public class CollectionToFixResponse : List<SolutionToFixModel>, IFixable
+public class SolutionsToFixCollectionModel : List<SolutionToFixModel>, IFixable
 {
     public void Fix()
     {

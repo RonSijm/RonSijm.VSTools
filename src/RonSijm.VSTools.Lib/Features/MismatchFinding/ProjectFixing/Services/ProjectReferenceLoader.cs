@@ -5,8 +5,8 @@ public class ProjectReferenceLoader(IEnumerable<IReferenceLoadingDecorator> refe
     public ProjectFileContainer GetProjectReferences(CoreOptionsRequest options)
     {
         var allProjectReferences = new ProjectFileContainer();
-        FileLocator.FindFiles("*.csproj", options.ProjectReferences, allProjectReferences);
-        FileLocator.FindFiles("*.csproj", options.DirectoriesToInspect, allProjectReferences);
+        FileLocator.FindFilesWithoutBinFolder("*.csproj", options.ProjectReferences, allProjectReferences);
+        FileLocator.FindFilesWithoutBinFolder("*.csproj", options.DirectoriesToInspect, allProjectReferences);
 
         foreach (var loadingDecorator in referenceLoadingDecorator)
         {

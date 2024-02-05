@@ -4,6 +4,11 @@ public class NamespaceExclusionHelper
 {
     public static string RemoveExcludes(string input, List<string> excludeList)
     {
+        if (!excludeList.Any())
+        {
+            return input;
+        }
+
         var output = input;
 
         var collidingExclusions = ListCollidingExclusions(excludeList).ToList();

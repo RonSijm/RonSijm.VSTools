@@ -3,7 +3,7 @@
 public class VSToolResult
 {
     public List<ProjectReferenceModel> InitResult { get; set; }
-    public List<OneOf<ItemsToFixResponse, CollectionToFixResponse>> Results { get; set; } = [];
+    public List<OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel>> Results { get; set; } = [];
 
     public bool HasErrors
     {

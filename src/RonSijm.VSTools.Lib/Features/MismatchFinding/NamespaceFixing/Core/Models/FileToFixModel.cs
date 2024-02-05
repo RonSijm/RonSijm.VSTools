@@ -9,12 +9,25 @@ public class FileToFixModel : FileModel, IFixableItem
     public List<IFixableItem> ItemsToFix { get; set; } = [];
     public void Fix()
     {
-        foreach (var fixableItem in ItemsToFix)
+        if (ItemsToFix.Count == 0)
+        {
+            return;
+        }
+
+        BreakOnFileHelper.BreakOnFile(FileName);
+
+        foreach (var fixableItem in ItemsToFix.Where(x => x is not IFileManipulationItem))
         {
             fixableItem.Fix();
         }
 
-        var newFileContent = Root.NormalizeWhitespace(elasticTrivia: true).ToFullString();
+        var newFileContent = FileExportFormatExtension.SyntaxNodeToString(this);
+
+        foreach (var fixableItem in ItemsToFix.Where(x => x is IFileManipulationItem))
+        {
+            newFileContent = newFileContent.Replace(fixableItem.CurrentItemValue, fixableItem.ExpectedItemValue);
+        }
+
         File.WriteAllText(FileName, newFileContent);
     }
 

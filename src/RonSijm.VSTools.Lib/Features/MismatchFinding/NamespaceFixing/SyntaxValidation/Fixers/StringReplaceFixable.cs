@@ -1,9 +1,8 @@
 ﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.SyntaxValidation.Fixers;
 
-public abstract class BaseSyntaxFixer : IFixableItem
+internal class StringReplaceFixable : IFileManipulationItem
 {
-    // ReSharper disable once EmptyConstructor - Justification - Used for debugging to break when fix is created.
-    private protected BaseSyntaxFixer()
+    public void Fix()
     {
     }
 
@@ -11,7 +10,4 @@ public abstract class BaseSyntaxFixer : IFixableItem
     public string ExpectedItemValue { get; set; }
     public string ExpectedItemDisplayValue { get; set; }
     public string CurrentItemValue { get; set; }
-    public FileToFixModel Parent { get; set; }
-
-    public abstract void Fix();
 }

@@ -6,7 +6,7 @@ public class FolderMismatchLocator : IMismatchLocator
 {
     public ushort Order => 1;
 
-    public OneOf<ItemsToFixResponse, CollectionToFixResponse> GetMismatches(CoreOptionsRequest options)
+    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
     {
         var result = new ItemsToFixResponse();
 

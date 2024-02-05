@@ -4,11 +4,12 @@ public class QualifiedNameSyntaxFixer : BaseSyntaxFixer
 {
     public override void Fix()
     {
-        var qualifiedNameSyntax = Parent.Root.DescendantNodes().OfType<QualifiedNameSyntax>().FirstOrDefault(x => x.ToString() == CurrentItemValue);
+        var qualifiedNameSyntaxes = Parent.Root.DescendantNodes().OfType<QualifiedNameSyntax>().Where(x => x.ToString() == CurrentItemValue).ToList();
+        var qualifiedNameSyntax = qualifiedNameSyntaxes.FirstOrDefault();
 
         if (qualifiedNameSyntax != null)
         {
-            var newName = ExpectedItemValue.ToQualifiedName();
+            var newName = ExpectedItemValue.ToQualifiedName().WithTrailingTrivia(SyntaxFactory.Space);
             Parent.Root = Parent.Root.ReplaceNode(qualifiedNameSyntax, newName);
         }
     }

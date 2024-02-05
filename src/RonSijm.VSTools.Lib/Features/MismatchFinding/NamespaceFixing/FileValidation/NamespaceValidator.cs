@@ -36,7 +36,33 @@ public class NamespaceValidator
 
         var projectName = projectFileName.Replace(".csproj", string.Empty);
 
-        FileLocator.FindFiles("*.cs", project.ProjectRoot.DirectoryPath, project.Files);
+        FileLocator.FindFilesWithoutBinFolder("*.cs", project.ProjectRoot.DirectoryPath, project.Files);
+        FileLocator.FindFilesWithoutBinFolder("*.razor", project.ProjectRoot.DirectoryPath, project.Files);
+
+        var resharperNamespaceValidator = ResharperDotProjectSettingsLoader.GetNamespaceFoldersToSkip(project.ProjectRoot.FullPath).ToList();
+        var directories = DirectoryLocator.GetAllDirectoriesWithoutBuildFolders(project.ProjectRoot.DirectoryPath);
+
+        foreach (var directory in directories)
+        {
+            var nameSpace = directory.Replace('\\', '.');
+            var excludedNamespace = NamespaceExclusionHelper.RemoveExcludes(nameSpace, resharperNamespaceValidator);
+            project.Namespaces.Add(nameSpace, excludedNamespace);
+        }
+
+        if (project.OtherNames != null)
+        {
+            foreach (var otherProjectNames in project.OtherNames)
+            {
+                var oldRootProjectNamespace = otherProjectNames.Replace(".csproj", string.Empty);
+
+                foreach (var projectNamespace in project.Namespaces)
+                {
+                    var namespaceType = string.IsNullOrWhiteSpace(projectNamespace.Key) ? NamespaceChangeType.Project : NamespaceChangeType.Folder;
+
+                    results.Add(new NamespaceChangeModel(oldRootProjectNamespace + projectNamespace.Key, projectName + projectNamespace.Value, namespaceType));
+                }
+            }
+        }
 
         foreach (var fileModel in project.Files)
         {
@@ -58,15 +84,13 @@ public class NamespaceValidator
             yield break;
         }
 
-
         var fileRelativePath = Path.GetRelativePath(project.ProjectRoot.FullPath, filePath);
         var namespaceExtension = fileRelativePath.Replace("..", string.Empty).Replace('\\', '.');
-        
-        var resharperNamespaceValidator = ResharperDotProjectSettingsLoader.GetNamespaceFoldersToSkip(project.ProjectRoot.FullPath).ToList();
-        var excludedNamespace = NamespaceExclusionHelper.RemoveExcludes(namespaceExtension, resharperNamespaceValidator);
 
-        var expectedNamespace = projectName + excludedNamespace;
-        expectedNamespace = expectedNamespace.ToNamespace();
+        var excludedNamespace = project.Namespaces[namespaceExtension];
+
+        var expectedNamespace = $"{projectName}{excludedNamespace}";
+        expectedNamespace = expectedNamespace.RemoveInvalidNamespaceCharacters();
 
         var fileContent = File.ReadAllText(fileModel.FileName);
 
@@ -100,7 +124,6 @@ public class NamespaceValidator
         fileModel.ItemsToFix.Add(itemToFix);
 
         var currentRootNamespace = !string.IsNullOrWhiteSpace(namespaceExtension) ? actualNamespace.Replace(namespaceExtension, string.Empty) : actualNamespace;
-        yield return (currentRootNamespace, projectName);
 
         var classNames = fileModel.Root.DescendantNodes().OfType<ClassDeclarationSyntax>().ToList();
 
@@ -114,7 +137,8 @@ public class NamespaceValidator
 
                 foreach (var namespaceVariant in namespaceVariants)
                 {
-                    yield return ($"{namespaceVariant}.{className}", $"{projectName}.{className}");
+                    var namespaceType = currentRootNamespace == namespaceVariant ? NamespaceChangeType.Class : NamespaceChangeType.ClassVariant;
+                    yield return new NamespaceChangeModel($"{namespaceVariant}.{className}", $"{projectName}.{className}", namespaceType);
                 }
             }
         }

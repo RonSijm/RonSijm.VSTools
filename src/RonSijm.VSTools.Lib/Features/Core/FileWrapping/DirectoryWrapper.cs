@@ -1,7 +1,6 @@
 ﻿// ReSharper disable NotNullOrRequiredMemberIsNotInitialized
 // ReSharper disable UnassignedGetOnlyAutoProperty
 
-using System.IO;
 using System.IO.Abstractions;
 
 namespace RonSijm.VSTools.Lib.Features.Core.FileWrapping;
@@ -16,7 +15,7 @@ internal class DirectoryWrapper : IDirectory
         throw new NotImplementedException();
     }
 
-    public IDirectoryInfo CreateDirectory(string path, UnixFileMode unixCreateMode)
+    public IDirectoryInfo CreateDirectory(string path, System.IO.UnixFileMode unixCreateMode)
     {
         throw new NotImplementedException();
     }
@@ -51,12 +50,12 @@ internal class DirectoryWrapper : IDirectory
         throw new NotImplementedException();
     }
 
-    public IEnumerable<string> EnumerateDirectories(string path, string searchPattern, SearchOption searchOption)
+    public IEnumerable<string> EnumerateDirectories(string path, string searchPattern, System.IO.SearchOption searchOption)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<string> EnumerateDirectories(string path, string searchPattern, EnumerationOptions enumerationOptions)
+    public IEnumerable<string> EnumerateDirectories(string path, string searchPattern, System.IO.EnumerationOptions enumerationOptions)
     {
         throw new NotImplementedException();
     }
@@ -71,12 +70,12 @@ internal class DirectoryWrapper : IDirectory
         throw new NotImplementedException();
     }
 
-    public IEnumerable<string> EnumerateFiles(string path, string searchPattern, SearchOption searchOption)
+    public IEnumerable<string> EnumerateFiles(string path, string searchPattern, System.IO.SearchOption searchOption)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<string> EnumerateFiles(string path, string searchPattern, EnumerationOptions enumerationOptions)
+    public IEnumerable<string> EnumerateFiles(string path, string searchPattern, System.IO.EnumerationOptions enumerationOptions)
     {
         throw new NotImplementedException();
     }
@@ -91,12 +90,12 @@ internal class DirectoryWrapper : IDirectory
         throw new NotImplementedException();
     }
 
-    public IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern, SearchOption searchOption)
+    public IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern, System.IO.SearchOption searchOption)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern, EnumerationOptions enumerationOptions)
+    public IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern, System.IO.EnumerationOptions enumerationOptions)
     {
         throw new NotImplementedException();
     }
@@ -123,7 +122,7 @@ internal class DirectoryWrapper : IDirectory
 
     public string[] GetDirectories(string path)
     {
-        throw new NotImplementedException();
+        return IOThrowHelper.ReadEnabled ? System.IO.Directory.GetDirectories(path) : IOThrowHelper.ReturnOrThrowRead<string[]>();
     }
 
     public string[] GetDirectories(string path, string searchPattern)
@@ -131,12 +130,12 @@ internal class DirectoryWrapper : IDirectory
         throw new NotImplementedException();
     }
 
-    public string[] GetDirectories(string path, string searchPattern, SearchOption searchOption)
+    public string[] GetDirectories(string path, string searchPattern, System.IO.SearchOption searchOption)
     {
         throw new NotImplementedException();
     }
 
-    public string[] GetDirectories(string path, string searchPattern, EnumerationOptions enumerationOptions)
+    public string[] GetDirectories(string path, string searchPattern, System.IO.EnumerationOptions enumerationOptions)
     {
         throw new NotImplementedException();
     }
@@ -156,12 +155,12 @@ internal class DirectoryWrapper : IDirectory
         throw new NotImplementedException();
     }
 
-    public string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
+    public string[] GetFiles(string path, string searchPattern, System.IO.SearchOption searchOption)
     {
         return IOThrowHelper.ReadEnabled ? System.IO.Directory.GetFiles(path, searchPattern, searchOption) : IOThrowHelper.ReturnOrThrowRead<string[]>();
     }
 
-    public string[] GetFiles(string path, string searchPattern, EnumerationOptions enumerationOptions)
+    public string[] GetFiles(string path, string searchPattern, System.IO.EnumerationOptions enumerationOptions)
     {
         throw new NotImplementedException();
     }
@@ -176,12 +175,12 @@ internal class DirectoryWrapper : IDirectory
         throw new NotImplementedException();
     }
 
-    public string[] GetFileSystemEntries(string path, string searchPattern, SearchOption searchOption)
+    public string[] GetFileSystemEntries(string path, string searchPattern, System.IO.SearchOption searchOption)
     {
         throw new NotImplementedException();
     }
 
-    public string[] GetFileSystemEntries(string path, string searchPattern, EnumerationOptions enumerationOptions)
+    public string[] GetFileSystemEntries(string path, string searchPattern, System.IO.EnumerationOptions enumerationOptions)
     {
         throw new NotImplementedException();
     }

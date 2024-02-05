@@ -4,14 +4,16 @@ public class SolutionMismatchLocator(ILogger<SolutionMismatchLocator> logger, Pr
 {
     public ushort Order => 3;
 
-    public OneOf<ItemsToFixResponse, CollectionToFixResponse> GetMismatches(CoreOptionsRequest options)
+    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
     {
-        var result = new CollectionToFixResponse();
+        var result = new SolutionsToFixCollectionModel();
 
         var solutionFiles = GetSolutionFiles(options.DirectoriesToInspect);
         var projectFiles = projectReferenceLoader.GetProjectReferences(options);
 
-        result.AddRange(solutionFiles.Select(solution => LoadSolution(solution, projectFiles)).Where(solutionToFixModel => solutionToFixModel.HasItems));
+        var loadedSolutions = solutionFiles.Select(solution => LoadSolution(solution, projectFiles)).Where(solutionToFixModel => solutionToFixModel.HasItems);
+
+        result.AddRange(loadedSolutions);
 
         return result;
     }
@@ -54,7 +56,7 @@ public class SolutionMismatchLocator(ILogger<SolutionMismatchLocator> logger, Pr
     private static List<FileModel> GetSolutionFiles(List<string> projectReferences)
     {
         var solutions = new List<FileModel>();
-        FileLocator.FindFiles("*.sln", projectReferences, solutions);
+        FileLocator.FindFilesWithoutBinFolder("*.sln", projectReferences, solutions);
         return solutions;
     }
 }

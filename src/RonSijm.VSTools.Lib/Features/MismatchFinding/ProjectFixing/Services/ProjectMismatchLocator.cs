@@ -5,7 +5,7 @@ public class ProjectMismatchLocator(ProjectReferenceLoader projectReferenceLoade
     public ushort Order => 2;
 
     /// <inheritdoc />
-    public OneOf<ItemsToFixResponse, CollectionToFixResponse> GetMismatches(CoreOptionsRequest options)
+    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
     {
         var result = new ItemsToFixResponse();
 
@@ -28,8 +28,8 @@ public class ProjectMismatchLocator(ProjectReferenceLoader projectReferenceLoade
     private void FindMismatchInIncludeReferences(CoreOptionsRequest options, List<ProjectRootElement> loadedProjects, ItemsToFixResponse result)
     {
         var allIncludeReferences = new ProjectFileContainer();
-        FileLocator.FindFiles("*.props", options.ProjectReferences, allIncludeReferences);
-        FileLocator.FindFiles("*.props", options.DirectoriesToInspect, allIncludeReferences);
+        FileLocator.FindFilesWithoutBinFolder("*.props", options.ProjectReferences, allIncludeReferences);
+        FileLocator.FindFilesWithoutBinFolder("*.props", options.DirectoriesToInspect, allIncludeReferences);
 
         foreach (var projectRootElement in loadedProjects)
         {
