@@ -1,4 +1,6 @@
-﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
+﻿using ItemReference = RonSijm.VSTools.Lib.Features.Core.Models.ItemReference;
+
+namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
 
 public class ErrorWhileMatchingResult
 {

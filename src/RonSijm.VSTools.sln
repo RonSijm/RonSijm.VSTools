@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RonSijm.VSTools.CLI", "RonS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RonSijm.VSTools.Lib", "RonSijm.VSTools.Lib\RonSijm.VSTools.Lib.csproj", "{BA321CE7-F02B-4248-B16B-3C08219EBE19}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{25CF089F-A91C-4013-87A3-DBE12E59C050}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

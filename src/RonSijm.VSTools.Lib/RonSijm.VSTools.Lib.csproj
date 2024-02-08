@@ -7,6 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Features\MismatchFinding\Core\Models\**" />
+	  <EmbeddedResource Remove="Features\MismatchFinding\Core\Models\**" />
+	  <None Remove="Features\MismatchFinding\Core\Models\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
 		<PackageReference Include="Microsoft.Build" Version="17.8.3" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
@@ -16,7 +22,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\MismatchFinding\Core\Models\" />
+	  <Reference Include="slngen">
+	    <HintPath>..\Libs\slngen.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

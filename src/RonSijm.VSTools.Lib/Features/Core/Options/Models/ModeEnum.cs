@@ -13,4 +13,9 @@ public enum ModeEnum
     /// Creates a configuration for the current projects, and adds a ReferenceId to the projects.
     /// </summary>
     CreateReferences = 2,
+
+    /// <summary>
+    /// Creates a solution for all found projects
+    /// </summary>
+    CreateSolution = 3,
 }

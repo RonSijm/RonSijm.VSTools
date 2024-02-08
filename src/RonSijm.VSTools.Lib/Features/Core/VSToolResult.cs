@@ -6,5 +6,5 @@ public class VSToolResult : IHaveInnerReturnablesOfT<INamedCollection>
 
     public bool HasErrors => false;
 
-    public IReadOnlyList<INamedCollection> InnerItems { get; set; } = new List<INamedCollection>();
+    public IReadOnlyList<INamedCollection> InnerItems { get; set; } = [];
 }

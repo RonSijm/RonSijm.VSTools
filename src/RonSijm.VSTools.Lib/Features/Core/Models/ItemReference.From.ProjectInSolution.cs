@@ -1,4 +1,4 @@
-﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Abstractions;
+﻿namespace RonSijm.VSTools.Lib.Features.Core.Models;
 
 public partial class ItemReference
 {
