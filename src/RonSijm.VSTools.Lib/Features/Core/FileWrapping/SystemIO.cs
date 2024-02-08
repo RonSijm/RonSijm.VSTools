@@ -1,6 +1,4 @@
-﻿using System.IO.Abstractions;
-
-namespace RonSijm.VSTools.Lib.Features.Core.FileWrapping;
+﻿namespace RonSijm.VSTools.Lib.Features.Core.FileWrapping;
 
 public static class SystemIO
 {

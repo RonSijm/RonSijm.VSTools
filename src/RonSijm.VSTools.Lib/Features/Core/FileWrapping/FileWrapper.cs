@@ -2,95 +2,88 @@
 // ReSharper disable UnassignedGetOnlyAutoProperty
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
-using System.IO;
-using System.IO.Abstractions;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Win32.SafeHandles;
-
 namespace RonSijm.VSTools.Lib.Features.Core.FileWrapping;
 
 public class FileWrapper : IFile
 {
     public IFileSystem FileSystem { get; }
-    public async Task AppendAllLinesAsync(string path, IEnumerable<string> contents, CancellationToken cancellationToken = new CancellationToken())
+    public async Task AppendAllLinesAsync(string path, IEnumerable<string> contents, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task AppendAllLinesAsync(string path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = new CancellationToken())
+    public async Task AppendAllLinesAsync(string path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = new())
 
     {
         throw new NotImplementedException();
     }
 
-    public async Task AppendAllTextAsync(string path, string contents, CancellationToken cancellationToken = new CancellationToken())
+    public async Task AppendAllTextAsync(string path, string contents, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task AppendAllTextAsync(string path, string contents, Encoding encoding, CancellationToken cancellationToken = new CancellationToken())
+    public async Task AppendAllTextAsync(string path, string contents, Encoding encoding, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task<byte[]> ReadAllBytesAsync(string path, CancellationToken cancellationToken = new CancellationToken())
+    public async Task<byte[]> ReadAllBytesAsync(string path, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task<string[]> ReadAllLinesAsync(string path, CancellationToken cancellationToken = new CancellationToken())
+    public async Task<string[]> ReadAllLinesAsync(string path, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task<string[]> ReadAllLinesAsync(string path, Encoding encoding, CancellationToken cancellationToken = new CancellationToken())
+    public async Task<string[]> ReadAllLinesAsync(string path, Encoding encoding, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task<string> ReadAllTextAsync(string path, CancellationToken cancellationToken = new CancellationToken())
+    public async Task<string> ReadAllTextAsync(string path, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task<string> ReadAllTextAsync(string path, Encoding encoding, CancellationToken cancellationToken = new CancellationToken())
+    public async Task<string> ReadAllTextAsync(string path, Encoding encoding, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public IAsyncEnumerable<string> ReadLinesAsync(string path, CancellationToken cancellationToken = new CancellationToken())
+    public IAsyncEnumerable<string> ReadLinesAsync(string path, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public IAsyncEnumerable<string> ReadLinesAsync(string path, Encoding encoding, CancellationToken cancellationToken = new CancellationToken())
+    public IAsyncEnumerable<string> ReadLinesAsync(string path, Encoding encoding, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task WriteAllBytesAsync(string path, byte[] bytes, CancellationToken cancellationToken = new CancellationToken())
+    public async Task WriteAllBytesAsync(string path, byte[] bytes, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task WriteAllLinesAsync(string path, IEnumerable<string> contents, CancellationToken cancellationToken = new CancellationToken())
+    public async Task WriteAllLinesAsync(string path, IEnumerable<string> contents, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task WriteAllLinesAsync(string path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = new CancellationToken())
+    public async Task WriteAllLinesAsync(string path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task WriteAllTextAsync(string path, string contents, CancellationToken cancellationToken = new CancellationToken())
+    public async Task WriteAllTextAsync(string path, string contents, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
 
-    public async Task WriteAllTextAsync(string path, string contents, Encoding encoding, CancellationToken cancellationToken = new CancellationToken())
+    public async Task WriteAllTextAsync(string path, string contents, Encoding encoding, CancellationToken cancellationToken = new())
     {
         throw new NotImplementedException();
     }
@@ -115,7 +108,7 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public StreamWriter AppendText(string path)
+    public System.IO.StreamWriter AppendText(string path)
     {
         throw new NotImplementedException();
     }
@@ -140,7 +133,7 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public FileSystemStream Create(string path, int bufferSize, FileOptions options)
+    public FileSystemStream Create(string path, int bufferSize, System.IO.FileOptions options)
     {
         throw new NotImplementedException();
     }
@@ -150,7 +143,7 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public StreamWriter CreateText(string path)
+    public System.IO.StreamWriter CreateText(string path)
     {
         throw new NotImplementedException();
     }
@@ -175,12 +168,12 @@ public class FileWrapper : IFile
         return IOThrowHelper.ReadEnabled ? System.IO.File.Exists(path) : IOThrowHelper.ReturnOrThrowRead<bool>();
     }
 
-    public FileAttributes GetAttributes(string path)
+    public System.IO.FileAttributes GetAttributes(string path)
     {
         throw new NotImplementedException();
     }
 
-    public FileAttributes GetAttributes(SafeFileHandle fileHandle)
+    public System.IO.FileAttributes GetAttributes(SafeFileHandle fileHandle)
     {
         throw new NotImplementedException();
     }
@@ -245,12 +238,12 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public UnixFileMode GetUnixFileMode(string path)
+    public System.IO.UnixFileMode GetUnixFileMode(string path)
     {
         throw new NotImplementedException();
     }
 
-    public UnixFileMode GetUnixFileMode(SafeFileHandle fileHandle)
+    public System.IO.UnixFileMode GetUnixFileMode(SafeFileHandle fileHandle)
     {
         throw new NotImplementedException();
     }
@@ -272,22 +265,22 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public FileSystemStream Open(string path, FileMode mode)
+    public FileSystemStream Open(string path, System.IO.FileMode mode)
     {
         throw new NotImplementedException();
     }
 
-    public FileSystemStream Open(string path, FileMode mode, FileAccess access)
+    public FileSystemStream Open(string path, System.IO.FileMode mode, System.IO.FileAccess access)
     {
         throw new NotImplementedException();
     }
 
-    public FileSystemStream Open(string path, FileMode mode, FileAccess access, FileShare share)
+    public FileSystemStream Open(string path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share)
     {
         throw new NotImplementedException();
     }
 
-    public FileSystemStream Open(string path, FileStreamOptions options)
+    public FileSystemStream Open(string path, System.IO.FileStreamOptions options)
     {
         throw new NotImplementedException();
     }
@@ -297,7 +290,7 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public StreamReader OpenText(string path)
+    public System.IO.StreamReader OpenText(string path)
     {
         throw new NotImplementedException();
     }
@@ -357,12 +350,12 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public void SetAttributes(string path, FileAttributes fileAttributes)
+    public void SetAttributes(string path, System.IO.FileAttributes fileAttributes)
     {
         throw new NotImplementedException();
     }
 
-    public void SetAttributes(SafeFileHandle fileHandle, FileAttributes fileAttributes)
+    public void SetAttributes(SafeFileHandle fileHandle, System.IO.FileAttributes fileAttributes)
     {
         throw new NotImplementedException();
     }
@@ -427,12 +420,12 @@ public class FileWrapper : IFile
         throw new NotImplementedException();
     }
 
-    public void SetUnixFileMode(string path, UnixFileMode mode)
+    public void SetUnixFileMode(string path, System.IO.UnixFileMode mode)
     {
         throw new NotImplementedException();
     }
 
-    public void SetUnixFileMode(SafeFileHandle fileHandle, UnixFileMode mode)
+    public void SetUnixFileMode(SafeFileHandle fileHandle, System.IO.UnixFileMode mode)
     {
         throw new NotImplementedException();
     }

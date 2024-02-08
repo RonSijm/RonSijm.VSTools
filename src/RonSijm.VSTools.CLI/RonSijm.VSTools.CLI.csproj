@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<PackAsTool>true</PackAsTool>
-		<ToolCommandName>dotnet-fixreferences</ToolCommandName>
+		<ToolCommandName>dotnet-vstools</ToolCommandName>
 		<OutputType>Exe</OutputType>
 		<PackageOutputPath>./../../nupkg</PackageOutputPath>
 		<TargetFramework>net8.0</TargetFramework>
@@ -20,6 +20,8 @@
 		<PackageReference Include="Microsoft.Build" Version="17.8.3" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
 		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />

@@ -16,7 +16,7 @@ public class OptionsFromArgsParser(ILogger<OptionsFromArgsParser> logger)
         cliParseResult.Value.Convert(baseOptions);
 
         // Forcing a config update when running in init mode, to save the cache.
-        if (baseOptions.Mode == ModeEnum.CreateReferences && baseOptions.Run)
+        if (baseOptions.Mode == ModeEnum.CreateReferences && baseOptions.RealRun)
         {
             baseOptions.UpdateConfig = true;
         }

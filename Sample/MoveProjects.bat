@@ -4,6 +4,10 @@ move RonSijm.VSTools.Sample.Lib1 Sample1\RonSijm.VSTools.Sample.Lib1
 move RonSijm.VSTools.Sample.Lib2 Lib2FolderRenamed
 mkdir Sample3\SubFolder
 move RonSijm.VSTools.Sample.Lib3 Sample3\SubFolder\RonSijm.VSTools.Sample.Lib3
+move RonSijm.VSTools.Sample.Lib3.Enums Sample3\SubFolder\RonSijm.Lib3
+move RonSijm.VSTools.Sample.Lib3.OtherStuff RonSijm.VSTools.Sample.Lib3.LongerNamespace.Whatever
+move RonSijm.VSTools.Sample.Lib3.Records RonSijm.VSTools.Records
+
 move RonSijm.VSTools.Sample.Lib4 Sample3\SubFolder\RonSijm.VSTools.Sample.Lib4
 move RonSijm.VSTools.Sample.Lib5 Sample3\SubFolder\Lib5Renamed
 move RonSijm.VSTools.Sample.Lib6 Sample3\SubFolder\Lib6Renamed

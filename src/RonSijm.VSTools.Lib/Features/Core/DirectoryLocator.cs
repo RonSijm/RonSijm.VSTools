@@ -4,10 +4,10 @@ public static class DirectoryLocator
 {
     public static List<string> GetAllDirectoriesWithoutBuildFolders(string directoryPath)
     {
-        return GetAllDirectories(directoryPath, IOSettings.BuildFolders);
+        return GetAllDirectories(directoryPath, IOSettings.BuildFolderExclusion);
     }
 
-    public static List<string> GetAllDirectories(string directoryPath, List<string> excludeFolders)
+    public static List<string> GetAllDirectories(string directoryPath, Func<string, bool> excludeFolders)
     {
         var result = new List<string>();
 
@@ -24,7 +24,7 @@ public static class DirectoryLocator
 
             foreach (var subDirectory in Directory.GetDirectories(dir))
             {
-                if (excludeFolders != null && excludeFolders.Any(subDirectory.Contains))
+                if (excludeFolders != null && excludeFolders(subDirectory))
                 {
                     continue;
                 }

@@ -1,7 +1,8 @@
 ﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
 
-[DebuggerDisplay("{File}")]
-public class SolutionToFixModel(string file) : ItemsToFixResponse
+[DebuggerDisplay("{ObjectName}")]
+public class SolutionToFixModel(string file) : FixableCollectionBase<ProjectInProjectToFixResult>
 {
-    public string File { get; } = file;
+    public override string ObjectType => "Solution";
+    public override string ObjectName { get; set; } = file;
 }

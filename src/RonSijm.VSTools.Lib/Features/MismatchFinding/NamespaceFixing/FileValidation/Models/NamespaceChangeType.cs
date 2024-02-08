@@ -5,5 +5,6 @@ public enum NamespaceChangeType
     Project,
     Folder,
     Class,
-    ClassVariant
+    ClassVariant,
+    Namespace
 }

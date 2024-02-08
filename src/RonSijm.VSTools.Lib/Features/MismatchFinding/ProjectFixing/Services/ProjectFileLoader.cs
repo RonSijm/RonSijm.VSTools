@@ -2,17 +2,17 @@
 
 public class ProjectFileLoader
 {
-    public List<ProjectRootElement> OpenProjects(List<string> directoriesToInspect)
+    public List<ProjectLoadedModel> OpenProjects(List<string> directoriesToInspect)
     {
         var projectsToFix = new List<FileModel>();
         FileLocator.FindFilesWithoutBinFolder("*.csproj", directoriesToInspect, projectsToFix);
 
-        var loadedProjects = new List<ProjectRootElement>();
+        var loadedProjects = new List<ProjectLoadedModel>();
 
         foreach (var project in projectsToFix)
         {
             var projectRootElement = ProjectRootElement.Open(project.FileName);
-            loadedProjects.Add(projectRootElement);
+            loadedProjects.Add(new ProjectLoadedModel(projectRootElement, project));
         }
 
         return loadedProjects;

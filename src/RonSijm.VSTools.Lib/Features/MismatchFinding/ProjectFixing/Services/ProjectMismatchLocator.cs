@@ -5,50 +5,57 @@ public class ProjectMismatchLocator(ProjectReferenceLoader projectReferenceLoade
     public ushort Order => 2;
 
     /// <inheritdoc />
-    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
+    public INamedCollection GetMismatches(CoreOptionsRequest options)
     {
-        var result = new ItemsToFixResponse();
+        var target = new ProjectsReferencesToFixCollection();
 
         var projectLoader = new ProjectFileLoader();
+
+        target.ObjectName = string.Join(',', options.DirectoriesToInspect);
+        var projectReferences = projectReferenceLoader.GetProjectReferences(options);
+
         var loadedProjects = projectLoader.OpenProjects(options.DirectoriesToInspect);
+        var loadedProjectWithModel = loadedProjects.Select(x => new Tuple<ProjectLoadedModel, ProjectsReferencesToFixModel>(x, new ProjectsReferencesToFixModel { ObjectName = x.File.FileName })).ToList();
 
-        var projectContainer = projectReferenceLoader.GetProjectReferences(options);
-
-        foreach (var projectRootElement in loadedProjects)
+        foreach (var projectLoadedModel in loadedProjectWithModel)
         {
-            var references = projectRootElement.GetReferencedProjects().ToList();
-            FindMismatches(projectContainer, references, result, projectRootElement.FullPath);
-        }
+            target.Add(projectLoadedModel.Item2);
 
-        FindMismatchInIncludeReferences(options, loadedProjects, result);
+            var includes = projectLoadedModel.Item1.Project.GetReferencedProjects().ToList();
+            var mismatches = includes.Select(reference => mismatchDetector.FindMismatch(projectReferences, projectLoadedModel.Item1.File.FileName, reference));
 
-        return result;
-    }
-
-    private void FindMismatchInIncludeReferences(CoreOptionsRequest options, List<ProjectRootElement> loadedProjects, ItemsToFixResponse result)
-    {
-        var allIncludeReferences = new ProjectFileContainer();
-        FileLocator.FindFilesWithoutBinFolder("*.props", options.ProjectReferences, allIncludeReferences);
-        FileLocator.FindFilesWithoutBinFolder("*.props", options.DirectoriesToInspect, allIncludeReferences);
-
-        foreach (var projectRootElement in loadedProjects)
-        {
-            var includes = projectRootElement.GetIncludes().ToList();
-            FindMismatches(allIncludeReferences, includes, result, projectRootElement.FullPath);
-        }
-    }
-
-    private void FindMismatches(ProjectFileContainer projectReferences, List<ItemReference> references, ItemsToFixResponse result, string projectPath)
-    {
-        foreach (var mismatchResult in references.Select(reference => mismatchDetector.FindMismatch(projectReferences, projectPath, reference)))
-        {
-            if (mismatchResult is { IsT0: true })
+            foreach (var misMatch in mismatches)
             {
-                result.Add(mismatchResult.Value.AsT0);
+                projectLoadedModel.Item2.Add(misMatch);
             }
-            else if (mismatchResult is { IsT1: true })
+        }
+
+        FindMismatchInIncludeReferences(options, loadedProjectWithModel);
+
+        return target;
+    }
+
+    private void FindMismatchInIncludeReferences(CoreOptionsRequest options, List<Tuple<ProjectLoadedModel, ProjectsReferencesToFixModel>> loadedProjects)
+    {
+        var projectReferences = new ProjectFileContainer();
+        FileLocator.FindFilesWithoutBinFolder("*.props", options.ProjectReferences, projectReferences);
+        FileLocator.FindFilesWithoutBinFolder("*.props", options.DirectoriesToInspect, projectReferences);
+
+        foreach (var projectLoadedModel in loadedProjects)
+        {
+            var includes = projectLoadedModel.Item1.Project.GetIncludes().ToList();
+
+            foreach (var reference in includes)
             {
-                result.Add(mismatchResult.Value.AsT1);
+                var mismatchResult = mismatchDetector.FindMismatch(projectReferences, projectLoadedModel.Item1.File.FileName, reference);
+                projectLoadedModel.Item2.Add(mismatchResult);
+            }
+
+            var mismatches = includes.Select(reference => mismatchDetector.FindMismatch(projectReferences, projectLoadedModel.Item1.File.FileName, reference));
+
+            foreach (var misMatch in mismatches)
+            {
+                projectLoadedModel.Item2.Add(misMatch);
             }
         }
     }

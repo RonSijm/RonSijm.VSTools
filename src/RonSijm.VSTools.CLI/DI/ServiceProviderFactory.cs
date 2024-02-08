@@ -2,17 +2,40 @@
 
 public static class ServiceProviderFactory
 {
-    public static ServiceProvider BuildServiceProvider()
+    public static IServiceCollection CreateServices(IServiceCollection services = null)
     {
-        var services = new ServiceCollection();
+        services ??= new ServiceCollection();
 
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!)
-            .AddJsonFile("VSTools.appsettings.json")
-            .Build();
+        AddTypesAndInterfaces(services, typeof(VSToolsHostedService));
 
-        AddTypesAndInterfaces(services, typeof(VSToolFacade));
-        AddTypesAndInterfaces(services, typeof(OptionsLogger));
+        return services;
+    }
+
+    public static IServiceCollection RegisterVSToolsLib(this IServiceCollection services)
+    {
+        services.AddHostedService<VSToolsHostedService>();
+        AddTypesAndInterfaces(services, typeof(VSToolsLibService));
+
+        return services;
+    }
+
+    public static IServiceCollection WithOptions(this IServiceCollection services, ParsedCLIOptionsModel options)
+    {
+        services.AddSingleton(options);
+
+        return services;
+    }
+    
+    public static IServiceCollection WithLogging(this IServiceCollection services, string logSettingsFile = null)
+    {
+        var configuration = logSettingsFile == null ? 
+            new ConfigurationBuilder()
+                .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!)
+                .AddJsonFile("VSTools.appsettings.json").Build() : 
+            
+            new ConfigurationBuilder()
+                .AddJsonFile(logSettingsFile)
+                .Build();
 
         services.AddLogging(loggingBuilder =>
         {
@@ -21,12 +44,11 @@ public static class ServiceProviderFactory
                 .CreateLogger();
 
             loggingBuilder.AddSerilog(logger, dispose: true);
+
+            Log.Logger = logger;
         });
 
-        services.AddTransient(typeof(Lazy<>), typeof(LazyProvider<>));
-
-        var serviceProvider = services.BuildServiceProvider(false);
-        return serviceProvider;
+        return services;
     }
 
     private static void AddTypesAndInterfaces(IServiceCollection services, Type targetType)

@@ -9,7 +9,7 @@ public static class OptionsModelConverter
         result.DirectoriesToInspect = model.DirectoriesToInspect;
         result.Mode = model.Mode;
         result.FolderFixMode = model.FolderFixMode;
-        result.DoRealRun = model.Run;
+        result.RealRun = model.RealRun;
         result.ProjectReferences = model.ProjectReferences;
         result.ProjectReferencesById = model.ProjectReferencesById;
 
@@ -23,7 +23,7 @@ public static class OptionsModelConverter
         result.OptionsFile = value.OptionsFile ?? result.OptionsFile;
         result.Mode = value.Mode ?? result.Mode;
         result.FolderFixMode = value.FolderFixMode ?? result.FolderFixMode;
-        result.Run = value.Run ?? result.Run;
+        result.RealRun = value.Run ?? result.RealRun;
         result.Silent = value.Silent ?? result.Silent;
         result.UpdateConfig = value.UpdateConfig ?? result.UpdateConfig;
 

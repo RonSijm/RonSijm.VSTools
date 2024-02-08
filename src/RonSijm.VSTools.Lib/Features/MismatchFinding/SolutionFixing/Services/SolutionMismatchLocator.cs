@@ -4,15 +4,18 @@ public class SolutionMismatchLocator(ILogger<SolutionMismatchLocator> logger, Pr
 {
     public ushort Order => 3;
 
-    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
+    public INamedCollection GetMismatches(CoreOptionsRequest options)
     {
-        var result = new SolutionsToFixCollectionModel();
+        var result = new SolutionsToFixCollection
+        {
+            ObjectName = string.Join(',', options.DirectoriesToInspect)
+        };
 
         var solutionFiles = GetSolutionFiles(options.DirectoriesToInspect);
         var projectFiles = projectReferenceLoader.GetProjectReferences(options);
 
-        var loadedSolutions = solutionFiles.Select(solution => LoadSolution(solution, projectFiles)).Where(solutionToFixModel => solutionToFixModel.HasItems);
-
+        var loadedSolutions = solutionFiles.Select(solution => LoadSolution(solution, projectFiles)).Where(solutionToFixModel => solutionToFixModel.HasRelevantItems);
+        
         result.AddRange(loadedSolutions);
 
         return result;

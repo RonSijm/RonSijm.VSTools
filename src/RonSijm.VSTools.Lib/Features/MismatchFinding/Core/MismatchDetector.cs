@@ -28,18 +28,15 @@ public class MismatchDetector
         var fullExpectedPath = Path.GetRelativePath(projectPath, actualPath);
         var expectedPath = fullExpectedPath[3..];
 
-        var combinedPath = Path.Combine(projectPath, $"..\\{reference.Path}");
-        var currentPath = Path.GetFullPath(combinedPath);
-
         if (reference.Path != expectedPath)
         {
             var itemToFix = new ProjectInProjectToFixResult
             {
                 ExpectedItemValue = expectedPath,
                 Reference = reference,
-                ExpectedItemDisplayValue = actualPath,
+                ExpectedItemDisplayValue = expectedPath,
                 CurrentItemValue = reference.Path,
-                CurrentItemDisplayValue = projectPath
+                CurrentItemDisplayValue = reference.Path,
             };
 
             return itemToFix;

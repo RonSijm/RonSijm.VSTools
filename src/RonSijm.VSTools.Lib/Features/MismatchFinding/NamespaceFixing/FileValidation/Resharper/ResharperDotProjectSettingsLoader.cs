@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation.Resharper;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation.Resharper;
 
 public static class ResharperDotProjectSettingsLoader
 {

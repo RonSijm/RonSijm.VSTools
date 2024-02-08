@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RonSijm.VSTools.CLI", "RonS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RonSijm.VSTools.Lib", "RonSijm.VSTools.Lib\RonSijm.VSTools.Lib.csproj", "{BA321CE7-F02B-4248-B16B-3C08219EBE19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RonSijm.VSTools.Tests", "RonSijm.VSTools.Tests\RonSijm.VSTools.Tests.csproj", "{BDC55830-BDA9-4822-90E9-7521F16367F7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{BA321CE7-F02B-4248-B16B-3C08219EBE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA321CE7-F02B-4248-B16B-3C08219EBE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA321CE7-F02B-4248-B16B-3C08219EBE19}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDC55830-BDA9-4822-90E9-7521F16367F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDC55830-BDA9-4822-90E9-7521F16367F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDC55830-BDA9-4822-90E9-7521F16367F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDC55830-BDA9-4822-90E9-7521F16367F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

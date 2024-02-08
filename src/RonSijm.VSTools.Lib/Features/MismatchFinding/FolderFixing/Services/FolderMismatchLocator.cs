@@ -1,14 +1,15 @@
-﻿using RonSijm.VSTools.Lib.Features.MismatchFinding.FolderFixing.Models;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.FolderFixing.Services;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.FolderFixing.Services;
 
 public class FolderMismatchLocator : IMismatchLocator
 {
     public ushort Order => 1;
 
-    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
+    public INamedCollection GetMismatches(CoreOptionsRequest options)
     {
-        var result = new ItemsToFixResponse();
+        var result = new FoldersToFixCollection
+        {
+            ObjectName = string.Join(',', options.DirectoriesToInspect)
+        };
 
         if (options.FolderFixMode == FolderFixModeEnum.DoNothing)
         {
@@ -18,9 +19,9 @@ public class FolderMismatchLocator : IMismatchLocator
         var projectLoader = new ProjectFileLoader();
         var loadedProjects = projectLoader.OpenProjects(options.DirectoriesToInspect);
 
-        foreach (var projectRootElement in loadedProjects)
+        foreach (var loadedModel in loadedProjects)
         {
-            var directoryName = Path.GetDirectoryName(projectRootElement.FullPath);
+            var directoryName = Path.GetDirectoryName(loadedModel.File.FileName);
 
             if (directoryName == null)
             {
@@ -30,7 +31,7 @@ public class FolderMismatchLocator : IMismatchLocator
             var directoryParts = directoryName.Split(Path.DirectorySeparatorChar);
             var lastFolderName = directoryParts[^1];
 
-            var fullFileName = Path.GetFileName(projectRootElement.FullPath);
+            var fullFileName = Path.GetFileName(loadedModel.File.FileName);
 
             if (fullFileName == null)
             {
@@ -41,26 +42,27 @@ public class FolderMismatchLocator : IMismatchLocator
 
             if (lastFolderName != fileName)
             {
-                // If there is a casing issue, first rename the item to "bak-" - because windows doesn't let you rename case-sensitive to the same filename.
-                var casingIssue = lastFolderName.Equals(fileName, StringComparison.InvariantCultureIgnoreCase);
-
                 if (options.FolderFixMode == FolderFixModeEnum.RenameProject)
                 {
                     var expectedProjectName = $"{lastFolderName}.csproj";
-                    var expectedProjectPath = Path.Combine(directoryName, casingIssue ? $"bak-{expectedProjectName}" : expectedProjectName);
+                    var expectedProjectPath = Path.Combine(directoryName, expectedProjectName);
 
-                    result.Add(new ProjectToRenameFixer { CurrentItemValue = projectRootElement.FullPath, ExpectedItemValue = expectedProjectPath, ExpectedItemDisplayValue = expectedProjectName, CurrentItemDisplayValue = fullFileName });
+                    result.Add(new ProjectToRenameFixer
+                    {
+                        CurrentItemValue = loadedModel.File.FileName,
+                        ExpectedItemValue = expectedProjectPath,
+                        ExpectedItemDisplayValue = expectedProjectName,
+                        CurrentItemDisplayValue = fullFileName,
+                    });
                 }
                 else
                 {
-                    var expectedItemValue = casingIssue ? $"bak-{fileName}" : fileName;
-
-                    result.Add(new FolderToRenameResult { CurrentItemValue = lastFolderName, ExpectedItemValue = expectedItemValue, ExpectedItemDisplayValue = expectedItemValue, CurrentItemDisplayValue = lastFolderName });
+                    result.Add(new FolderToRenameResult { CurrentItemValue = lastFolderName, ExpectedItemValue = fileName, ExpectedItemDisplayValue = fileName, CurrentItemDisplayValue = lastFolderName });
                 }
             }
         }
 
-        var duplicateProjects = result.ItemsToFix.Where(x => x is ProjectToRenameFixer).GroupBy(x => x.ExpectedItemDisplayValue).ToList();
+        var duplicateProjects = result.InnerItems.Where(x => x is ProjectToRenameFixer).Cast<ProjectToRenameFixer>().GroupBy(x => x.ExpectedItemDisplayValue).ToList();
 
         foreach (var duplicateProject in duplicateProjects.Where(x => x.Count() > 1))
         {

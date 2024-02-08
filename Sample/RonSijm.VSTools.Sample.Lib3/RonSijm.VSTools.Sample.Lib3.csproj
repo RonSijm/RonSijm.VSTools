@@ -3,4 +3,9 @@
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RonSijm.VSTools.Sample.Lib3.Enums\RonSijm.VSTools.Sample.Lib3.Enums.csproj" />
+    <ProjectReference Include="..\RonSijm.VSTools.Sample.Lib3.OtherStuff\RonSijm.VSTools.Sample.Lib3.OtherStuff.csproj" />
+    <ProjectReference Include="..\RonSijm.VSTools.Sample.Lib3.Records\RonSijm.VSTools.Sample.Lib3.Records.csproj" />
+  </ItemGroup>
 </Project>

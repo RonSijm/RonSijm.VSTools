@@ -1,8 +1,6 @@
 ﻿// ReSharper disable NotNullOrRequiredMemberIsNotInitialized
 // ReSharper disable UnassignedGetOnlyAutoProperty
 
-using System.IO.Abstractions;
-
 namespace RonSijm.VSTools.Lib.Features.Core.FileWrapping;
 
 internal class PathWrapper : IPath

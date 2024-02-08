@@ -1,5 +1,4 @@
 // Global using directives
-global using static RonSijm.VSTools.Lib.Features.Core.FileWrapping.SystemIO;
 
 global using System;
 global using System.Collections.Generic;
@@ -16,7 +15,6 @@ global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;
 global using RonSijm.VSTools.Lib.Features.Core;
-global using RonSijm.VSTools.Lib.Features.Core.Interfaces;
 global using RonSijm.VSTools.Lib.Features.Core.Models;
 global using RonSijm.VSTools.Lib.Features.Core.Options.Models;
 global using RonSijm.VSTools.Lib.Features.CreateReferences.Interfaces;
@@ -32,3 +30,25 @@ global using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Extensio
 global using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
 global using RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Services;
 global using RonSijm.VSTools.Lib.Features.MismatchFinding.SolutionFixing.Models;
+
+global using System.Collections;
+global using System.IO.Abstractions;
+global using System.Runtime.CompilerServices;
+global using System.Text;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using System.Xml.Linq;
+global using JetBrains.Annotations;
+global using Microsoft.Win32.SafeHandles;
+global using RonSijm.VSTools.Lib.Features.Core.Extensions;
+global using RonSijm.VSTools.Lib.Features.Core.Interfaces.CollectionInterfaces;
+global using RonSijm.VSTools.Lib.Features.Core.Interfaces.ItemInterfaces;
+global using RonSijm.VSTools.Lib.Features.MismatchFinding.Core.Services;
+global using RonSijm.VSTools.Lib.Features.MismatchFinding.FolderFixing.Models;
+global using RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation;
+global using RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation.Helpers;
+global using RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation.Resharper;
+global using RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.SyntaxValidation;
+global using RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.SyntaxValidation.Interfaces;
+
+global using static RonSijm.VSTools.Lib.Features.Core.FileWrapping.SystemIO;

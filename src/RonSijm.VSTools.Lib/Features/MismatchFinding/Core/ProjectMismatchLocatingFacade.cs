@@ -9,26 +9,23 @@ public class ProjectMismatchLocatingFacade(IEnumerable<IMismatchLocator> mismatc
     public VSToolResult Run(CoreOptionsRequest options)
     {
         var result = new VSToolResult();
+        var interfaceResult = (IHaveInnerReturnablesOfT<INamedCollection>)result;
 
         foreach (var mismatchLocator in _mismatchLocators)
         {
             var projectResult = mismatchLocator.GetMismatches(options);
-            mismatchingResultLogger.LogProjectResults(projectResult);
-            result.Results.Add(projectResult);
+            mismatchingResultLogger.LogResults(projectResult);
 
-            if (!options.DoRealRun)
+            interfaceResult.Add(projectResult);
+
+            if (!options.RealRun)
             {
                 continue;
             }
 
-            switch (projectResult)
+            if (projectResult is IFixable fixable)
             {
-                case { IsT0: true, AsT0: IFixable singleFixable }:
-                    singleFixable.Fix();
-                    break;
-                case { IsT1: true, AsT1: IFixable collectionFixable }:
-                    collectionFixable.Fix();
-                    break;
+                fixable.Fix();
             }
         }
 

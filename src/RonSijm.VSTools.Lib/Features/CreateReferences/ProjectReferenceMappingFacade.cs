@@ -28,7 +28,7 @@ public class ProjectReferenceMappingFacade(ILogger<ProjectReferenceMappingFacade
             logger.LogInformation("Project: {Project} - Existing: {Existing} - ReferenceId: {ProjectReferenceId}", project, projectReferenceModel.Existing, projectReferenceModel.ProjectReferenceId);
         }
 
-        if (!options.DoRealRun)
+        if (!options.RealRun)
         {
             return result;
         }

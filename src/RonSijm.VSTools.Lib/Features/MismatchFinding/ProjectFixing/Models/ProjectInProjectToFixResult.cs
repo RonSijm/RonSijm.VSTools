@@ -1,6 +1,6 @@
 ﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.ProjectFixing.Models;
 
-public class ProjectInProjectToFixResult : IFixableItem
+public class ProjectInProjectToFixResult : IFixable, ILoggableItem, IHaveName
 {
     public ItemReference Reference { get; set; }
 
@@ -13,5 +13,9 @@ public class ProjectInProjectToFixResult : IFixableItem
     {
         Reference.SetPath(ExpectedItemValue);
         Reference.SaveTarget.Save();
+
+        Reference = null;
     }
+
+    public string ObjectName => Reference.Path;
 }

@@ -3,5 +3,5 @@
 public class ProjectReferenceByIdModel
 {
     public string ProjectReferenceId { get; set; }
-    public List<string> ProjectNames { get; set; } = new();
+    public List<string> ProjectNames { get; set; } = [];
 }

@@ -1,6 +1,6 @@
 ﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.FolderFixing.Models;
 
-public class FolderToRenameResult : IFixableItem
+public class FolderToRenameResult : IFixable
 {
     public string CurrentItemValue { get; set; }
     public string CurrentItemDisplayValue { get; set; }
@@ -9,6 +9,17 @@ public class FolderToRenameResult : IFixableItem
 
     public void Fix()
     {
-        Directory.Move(CurrentItemValue, ExpectedItemValue);
+        var casingIssue = CurrentItemValue.Equals(ExpectedItemValue, StringComparison.InvariantCultureIgnoreCase);
+
+        // If there is a casing issue, first rename the item to "bak-" - because windows doesn't let you rename case-sensitive to the same filename.
+        if (casingIssue)
+        {
+            Directory.Move(CurrentItemValue, $"{ExpectedItemValue}-vstoolBackup");
+            Directory.Move($"{ExpectedItemValue}-vstoolBackup", ExpectedItemValue);
+        }
+        else
+        {
+            Directory.Move(CurrentItemValue, ExpectedItemValue);
+        }
     }
 }

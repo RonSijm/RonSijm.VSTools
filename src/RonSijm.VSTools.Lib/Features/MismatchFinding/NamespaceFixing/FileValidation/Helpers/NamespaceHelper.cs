@@ -7,28 +7,32 @@ public static class NamespaceHelper
         return input?.Replace("-", "_");
     }
 
-    public static List<string> GenerateRelativePaths(string callingNamespace, string calledNamespace)
+    public static string FindCommonRootNamespace(string namespace1, string namespace2)
     {
-        var callingParts = callingNamespace.Split('.');
-        var calledParts = calledNamespace.Split('.');
+        var parts1 = namespace1.Split('.');
+        var parts2 = namespace2.Split('.');
 
-        var len = callingParts.Length > calledParts.Length ?
-            calledParts.Length :
-            callingParts.Length;
-
-        var common = 0;
-        while (common < len && callingParts[callingParts.Length - common - 1] == calledParts[calledParts.Length - common - 1])
+        var commonRootIndex = 0;
+        while (commonRootIndex < Math.Min(parts1.Length, parts2.Length) && parts1[commonRootIndex] == parts2[commonRootIndex])
         {
-            common++;
+            commonRootIndex++;
         }
 
-        var callsList = new List<string>();
-        for (var i = common; i <= calledParts.Length; i++)
+        return string.Join(".", parts1, 0, commonRootIndex);
+    }
+
+    public static string FindNonCommonRootNamespace(string namespace1, string namespace2)
+    {
+        var parts1 = namespace1.Split('.');
+        var parts2 = namespace2.Split('.');
+
+        var commonRootIndex = 0;
+
+        while (commonRootIndex < Math.Min(parts1.Length, parts2.Length) && parts1[commonRootIndex] == parts2[commonRootIndex])
         {
-            var call = string.Join(".", calledParts, calledParts.Length - i, i);
-            callsList.Add(call);
+            commonRootIndex++;
         }
 
-        return callsList.Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+        return string.Join(".", parts2, commonRootIndex, parts2.Length - commonRootIndex);
     }
 }

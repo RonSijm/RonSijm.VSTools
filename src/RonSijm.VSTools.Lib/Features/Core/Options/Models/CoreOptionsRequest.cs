@@ -16,7 +16,7 @@ public class CoreOptionsRequest
     /// Indicates whether you want to do a cold run, and only see the results.
     /// Instead of actually commiting the changes.
     /// </summary>
-    public bool DoRealRun { get; set; }
+    public bool RealRun { get; set; }
 
     /// <summary>
     /// Indicate the mode in which to run.

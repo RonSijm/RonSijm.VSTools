@@ -7,7 +7,8 @@ using RonSijm.VSTools.Sample.Lib12;
 using RonSijm.VSTools.Sample.Lib13;
 using RonSijm.VSTools.Sample.Lib13.Project;
 using RonSijm.VSTools.Sample.Lib14;
-using RonSijm.VSTools.Sample.Lib2.WriterInSubfolder;
+using RonSijm.VSTools.Sample.Lib2.BinWriterInSubfolder;
+using RonSijm.VSTools.Sample.Lib4.Objects;
 
 namespace RonSijm.VSTools.Sample.ConsoleApp;
 

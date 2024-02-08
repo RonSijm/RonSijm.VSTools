@@ -11,5 +11,5 @@ public interface IMismatchLocator
     /// Gets the Mismatching References and returns them.
     /// This method should not actually fix them, for the purpose of allowing you to do a cold-run, and display what would be fixed before commiting to actually fixing it.
     /// </summary>
-    OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options);
+    INamedCollection GetMismatches(CoreOptionsRequest options);
 }

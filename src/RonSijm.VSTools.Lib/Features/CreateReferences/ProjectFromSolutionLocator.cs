@@ -2,7 +2,7 @@
 
 public class ProjectFromSolutionLocator
 {
-    public List<ProjectReferenceModel> GetProjectReferences(List<ProjectRootElement> loadedProjects)
+    public List<ProjectReferenceModel> GetProjectReferences(List<ProjectLoadedModel> loadedProjects)
     {
         var result = new List<ProjectReferenceModel>();
 
@@ -10,7 +10,7 @@ public class ProjectFromSolutionLocator
         {
             var projectHasProjectReferenceId = false;
 
-            var itemGroups = project.Children.Where(x => x is ProjectPropertyGroupElement).Cast<ProjectPropertyGroupElement>().ToList();
+            var itemGroups = project.Project.Children.Where(x => x is ProjectPropertyGroupElement).Cast<ProjectPropertyGroupElement>().ToList();
             foreach (var itemGroup in itemGroups)
             {
                 foreach (var itemGroupChild in itemGroup.Children.Where(x => x is ProjectPropertyElement).Cast<ProjectPropertyElement>())
@@ -23,7 +23,8 @@ public class ProjectFromSolutionLocator
                         {
                             Existing = true,
                             ProjectReferenceId = itemGroupChild.Value,
-                            Project = project
+                            Project = project.Project,
+                            File = project.File
                         });
                     }
                 }
@@ -43,7 +44,7 @@ public class ProjectFromSolutionLocator
             {
                 Existing = false,
                 ProjectReferenceId = Guid.NewGuid().ToString(),
-                Project = project
+                Project = project.Project
             });
         }
 

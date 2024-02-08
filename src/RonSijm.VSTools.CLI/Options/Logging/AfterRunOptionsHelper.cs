@@ -1,4 +1,6 @@
-﻿namespace RonSijm.VSTools.CLI.Options.Logging;
+﻿using RonSijm.VSTools.Lib.Features.Core.Interfaces.CollectionInterfaces;
+
+namespace RonSijm.VSTools.CLI.Options.Logging;
 
 public class AfterRunOptionsHelper(ILogger<AfterRunOptionsHelper> logger)
 {
@@ -9,11 +11,13 @@ public class AfterRunOptionsHelper(ILogger<AfterRunOptionsHelper> logger)
             return null;
         }
 
-        if (currentOptions.Run)
+        if (currentOptions.RealRun)
         {
+            var haveInnerReturnables = (IHaveInnerReturnables)result;
+
             logger.LogInformation("Runing finished.");
 
-            if (result.HasItems)
+            if (haveInnerReturnables.RelevantItemCount != 0)
             {
                 logger.LogInformation("Above are the results that were fixed.");
                 logger.LogInformation("You could do another cold-run to ensure everything is fixed.");
@@ -25,9 +29,14 @@ public class AfterRunOptionsHelper(ILogger<AfterRunOptionsHelper> logger)
         }
         else
         {
-            logger.LogInformation("Cold-run finished.");
+            var haveInnerReturnables = (IHaveInnerReturnables)result;
 
-            if (result.HasItems)
+            logger.LogInformation("Cold-run finished.");
+            logger.LogInformation("Note that in the real run more issues might arise.");
+            logger.LogInformation("For example, if you rename a project, it's namespace will change,");
+            logger.LogInformation("So we'll also have to update the namespace references.");
+
+            if (haveInnerReturnables.RelevantItemCount != 0)
             {
                 logger.LogInformation("Above are the results that were found.");
                 logger.LogInformation("Nothing has been changed yet. Do a real run to persist these changes.");
@@ -77,7 +86,7 @@ public class AfterRunOptionsHelper(ILogger<AfterRunOptionsHelper> logger)
                 return x =>
                 {
                     x.UpdateConfig = currentOptions.Mode == ModeEnum.CreateReferences || currentOptions.UpdateConfig;
-                    x.Run = true;
+                    x.RealRun = true;
                     x.Mode = currentOptions.Mode;
                 };
             }
@@ -86,7 +95,7 @@ public class AfterRunOptionsHelper(ILogger<AfterRunOptionsHelper> logger)
             {
                 return x =>
                 {
-                    x.Run = false;
+                    x.RealRun = false;
                     x.Mode = ModeEnum.CreateReferences;
                 };
             }
@@ -95,7 +104,7 @@ public class AfterRunOptionsHelper(ILogger<AfterRunOptionsHelper> logger)
             {
                 return x =>
                 {
-                    x.Run = false;
+                    x.RealRun = false;
                     x.Mode = ModeEnum.FindMismatches;
                 };
             }

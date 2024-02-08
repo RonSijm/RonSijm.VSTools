@@ -1,14 +1,26 @@
-﻿namespace RonSijm.VSTools.CLI;
+﻿using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+
+namespace RonSijm.VSTools.CLI;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        ProgramSettings.ProgramFileExtension.CreateFileExtensionAssociation("VSTools", "Tool to Automatically fix VS Paths", $"--{nameof(CLIOptionsModel.OptionsFile)} \"%1\"");
+        var baseServiceProvider = ServiceProviderFactory.CreateServices().WithLogging().BuildServiceProvider();
+        var optionsFromArgsParser = baseServiceProvider.GetRequiredService<OptionsFromArgsParser>();
+        var options = optionsFromArgsParser.Load(args);
 
-        var serviceProvider = ServiceProviderFactory.BuildServiceProvider();
+        if (options == null)
+        {
+            Console.WriteLine("Input parameters were invalid.");
+            return;
+        }
 
-        var program = serviceProvider.GetRequiredService<CLICore>();
-        program.Start(args);
+        await Host.CreateDefaultBuilder(args).ConfigureServices((_, services) =>
+        {
+            ServiceProviderFactory.CreateServices(services).RegisterVSToolsLib().WithLogging(options.LoggingOptionsFile).WithOptions(options);
+        }).UseSerilog()
+            .RunConsoleAsync();
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation.Models;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation.Models;
 
 public class ProjectWithFilesLoadedCollectionModel : IList<ProjectWithFilesLoadedModel>
 {

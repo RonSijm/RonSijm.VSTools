@@ -1,12 +1,9 @@
-﻿using RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.FileValidation;
-using RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.SyntaxValidation;
-
-namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.Core;
+﻿namespace RonSijm.VSTools.Lib.Features.MismatchFinding.NamespaceFixing.Core;
 
 public class NamespaceSyntaxFixingFacade(ProjectReferenceLoader projectReferenceLoader, NamespaceValidator namespaceValidator, RoslynSyntaxFixingFacade roslynSyntaxFixingFacade) : IMismatchLocator
 {
     public ushort Order => 4;
-    public OneOf<ItemsToFixResponse, SolutionsToFixCollectionModel> GetMismatches(CoreOptionsRequest options)
+    public INamedCollection GetMismatches(CoreOptionsRequest options)
     {
         var projectReferences = projectReferenceLoader.GetProjectReferences(options);
         var loadedProjects = projectReferences.Select(projectMetadata => new ProjectWithFilesLoadedModel
@@ -19,9 +16,9 @@ public class NamespaceSyntaxFixingFacade(ProjectReferenceLoader projectReference
 
         roslynSyntaxFixingFacade.FixSyntax(loadedProjects, allRenamedNamespaces);
 
-        var itemsToFix = loadedProjects.SelectMany(x => x.Files).Where(x => x.ItemsToFix.Count != 0).ToList();
+        var itemsToFix = loadedProjects.SelectMany(x => x.Files).Where(x => x.InnerItems.Count != 0).ToList();
 
-        var result = new ItemsToFixResponse();
+        var result = new SyntaxesToFixCollection();
 
         result.AddRange(itemsToFix);
         return result;

@@ -6,7 +6,7 @@ public class OptionsLogger(ILogger<OptionsLogger> logger)
     {
         if (options.Mode == ModeEnum.FindMismatches)
         {
-            logger.LogInformation(options.Run ? "Fixing reference..." : "Doing cold run...");
+            logger.LogInformation(options.RealRun ? "Fixing reference..." : "Doing cold run...");
 
             logger.LogInformation("Fixing Directories:");
 
