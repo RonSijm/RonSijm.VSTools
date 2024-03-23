@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.1" />
+		<PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.9.5" />
+		<PackageReference Include="System.IO.Abstractions" Version="20.0.15" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\RonSijm.VSTools.Core.DataContracts\RonSijm.VSTools.Core.DataContracts.csproj" />
+	  <ProjectReference Include="..\..\Core\RonSijm.VSTools.Core.FileOps\RonSijm.VSTools.Core.FileOps.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="slngen">
+	    <HintPath>..\..\Libs\slngen.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+</Project>

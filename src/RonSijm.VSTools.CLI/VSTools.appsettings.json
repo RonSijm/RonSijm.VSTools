@@ -3,16 +3,8 @@
     "MinimumLevel": {
       "Default": "Verbose",
       "Override": {
-        "MassTransit": "Fatal"
+        //"MassTransit": "Fatal"
       }
     },
-    "Using": [
-      "Serilog.Sinks.Console"
-    ],
-    "WriteTo": [
-      {
-        "Name": "Console"
-      }
-    ]
   }
 }

@@ -1,4 +1,6 @@
-﻿namespace RonSijm.VSTools.CLI.Options.InputArgs.Models;
+﻿using RonSijm.VSTools.Core.DataContracts.CoreModels;
+
+namespace RonSijm.VSTools.CLI.Options.InputArgs.Models;
 
 /// <summary>
 /// This is a different model than <see cref="ParsedCLIOptionsModel"/> because we do want to save these properties in the output,
@@ -7,4 +9,6 @@
 public class CLISaveOptionsModel : CoreOptionsRequest
 {
     public string LoggingOptionsFile { get; set; }
+
+    public string WorkingDirectory { get; set; }
 }

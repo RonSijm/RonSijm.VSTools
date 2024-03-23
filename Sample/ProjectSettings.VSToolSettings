@@ -1,7 +1,12 @@
 {
-  "directoriesToInspect": [
+  "LoggingOptionsFile": null,
+  "WorkingDirectory": "C:\\Dev\\RonSijm\\RonSijm.VSTools\\Sample",
+  "DirectoriesToInspect": [
     "C:\\Dev\\RonSijm\\RonSijm.VSTools\\Sample"
   ],
-  "run": false,
-  "fixMode": "RunScan"
+  "ProjectReferences": null,
+  "RealRun": false,
+  "Mode": "Interactive",
+  "FolderFixMode": "DoNothing",
+  "ProjectReferencesById": null
 }

@@ -1,0 +1,16 @@
+﻿using RonSijm.VSTools.Core.DataContracts.ProjectFixingModels.Abstractions;
+
+namespace RonSijm.VSTools.Core.DataContracts.Helpers;
+
+public static class ProjectElementContainerExtensions
+{
+    public static ProjectRootElementWrapper GetRoot(this ProjectElementContainer project)
+    {
+        if (project is ProjectRootElement rootElement)
+        {
+            return rootElement;
+        }
+
+        return GetRoot(project.Parent);
+    }
+}

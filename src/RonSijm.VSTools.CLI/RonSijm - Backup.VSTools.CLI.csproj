@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>dotnet-vstools</ToolCommandName>
+		<OutputType>Exe</OutputType>
+		<PackageOutputPath>./../../nupkg</PackageOutputPath>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<ApplicationIcon>RonSijm.VSTools.ico</ApplicationIcon>
+		<Version>1.1.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="RonSijm.VSTools.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommandLineParser" Version="[2.9.1, 3.0.0)" />
+		<PackageReference Include="MassTransit" Version="[8.0.0,9.0)" />
+		<PackageReference Include="Microsoft.Build" Version="[17.8.3, 18.0)" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="[8.0.0,9.0)" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="[8.0.0,9.0)" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="[8.0.0,9.0)" />
+		<PackageReference Include="ReactiveUI" Version="19.5.41" />
+		<PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="[8.0.0,9.0)" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="[8.0.0,9.0)" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="[8.0.0,9.0)" />
+		<PackageReference Include="Serilog.Sinks.File" Version="[5.0.0,6.0)" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="[5.0.0,6.0)" />
+		<PackageReference Include="System.IO.Abstractions" Version="[20.0.4,21.0)" />
+		<PackageReference Include="Terminal.Gui" Version="2.0.0-pre.251" />
+		<PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" Version="1.3.1" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Core\RonSijm.VSTools.Core.IOAbstractions\RonSijm.VSTools.Core.IOAbstractions.csproj" />
+	  <ProjectReference Include="..\Core\RonSijm.VSTools.Core.Logging\RonSijm.VSTools.Core.Logging.csproj" />
+	  <ProjectReference Include="..\Modules\RonSijm.VSTools.Module.NamespaceFixer\RonSijm.VSTools.Module.NamespaceFixer.csproj" />
+	  <ProjectReference Include="..\RonSijm.VSTools.Lib\RonSijm.VSTools.Lib.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="VSTools.appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="UI\Components\" />
+	</ItemGroup>
+
+</Project>

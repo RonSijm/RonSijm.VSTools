@@ -1,6 +1,4 @@
-﻿using RonSijm.VSTools.Lib.Features.Core.Options;
-
-namespace RonSijm.VSTools.CLI.Options.Core;
+﻿namespace RonSijm.VSTools.CLI.Options.Core;
 
 public static class OptionExtensions
 {
@@ -12,9 +10,28 @@ public static class OptionExtensions
 
     public static ParsedCLIOptionsModel LoadOptions(this string optionsFile)
     {
-        var json = File.ReadAllText(optionsFile);
-        var options = JsonSerializer.Deserialize<ParsedCLIOptionsModel>(json, JsonSettingsContainer.SettingsIndented);
+        ParsedCLIOptionsModel options;
+
+        try
+        {
+            var json = File.ReadAllText(optionsFile);
+            options = JsonSerializer.Deserialize<ParsedCLIOptionsModel>(json, JsonSettingsContainer.SettingsIndented);
+
+
+            return options;
+        }
+        catch (Exception)
+        {
+            options = new ParsedCLIOptionsModel();
+        }
+
         options.OptionsFile = optionsFile;
+
+        if (string.IsNullOrWhiteSpace(options.WorkingDirectory))
+        {
+            var path = Path.GetDirectoryName(optionsFile);
+            options.WorkingDirectory = path;
+        }
 
         return options;
     }

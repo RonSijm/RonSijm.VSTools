@@ -1,27 +1,27 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
+using RonSijm.VSTools.CLI.Options.Services;
+using RonSijm.VSTools.Lib;
 
 namespace RonSijm.VSTools.CLI;
 
-public class VSToolsHostedService(ParsedCLIOptionsModel options, ILogger<VSToolsHostedService> logger, OptionsLogger optionsLogger, VSToolsLibService vstoolsLibService, AfterRunOptionsHelper afterRunOptionsHelper) : IHostedService
+public class VSToolsHostedService(ParsedCLIOptionsModel options, OptionsLoggingService optionsLoggingService, VSToolsLibService vstoolsLibService, InteractiveOptionsHelper interactiveOptionsHelper)
 {
-    public Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(CancellationToken cancellationToken = default)
     {
         var runOptions = new Action<ParsedCLIOptionsModel>(_ => { });
 
+
         do
         {
-            logger.CleanConsole();
-
             runOptions(options);
 
             // If you're running silently, we don't have to loop, and close the application after finishing
             runOptions = options.Silent ? null : runOptions;
 
-            optionsLogger.LogActions(options);
+            await optionsLoggingService.LogActions(options);
 
-            var result = vstoolsLibService.Fix(options);
+            var result = await vstoolsLibService.Fix(options);
 
             if (options.UpdateConfig && options.OptionsFile != null)
             {
@@ -30,12 +30,10 @@ public class VSToolsHostedService(ParsedCLIOptionsModel options, ILogger<VSTools
 
             if (runOptions != null)
             {
-                runOptions = afterRunOptionsHelper.PrintInputOptions(result, options);
+                runOptions = await interactiveOptionsHelper.PrintInputOptions(result, options);
                 Console.WriteLine();
             }
         } while (runOptions != null);
-
-        return Task.CompletedTask;
     }
 
     public Task StopAsync(CancellationToken cancellationToken)

@@ -2,7 +2,7 @@
   "profiles": {
     "RonSijm.VSTools.CLI": {
       "commandName": "Project",
-      "commandLineArgs": "--OptionsFile C:\\Dev\\RonSijm\\RonSijm.VSTools\\Sample\\ProjectSettings.VSToolSettings --Mode FindMismatches --FolderFixMode RenameProject"
+      "commandLineArgs": "--OptionsFile C:\\Dev\\Appical\\VSTools\\SolutionGen.VSToolSettings"
     }
   }
 }

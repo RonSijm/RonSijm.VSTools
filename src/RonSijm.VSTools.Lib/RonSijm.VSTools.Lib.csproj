@@ -1,24 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<PackageType>DotnetTool</PackageType>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Features\MismatchFinding\Core\Models\**" />
-	  <EmbeddedResource Remove="Features\MismatchFinding\Core\Models\**" />
-	  <None Remove="Features\MismatchFinding\Core\Models\**" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="[8.0.0, 9.0.0)" />
+		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+		<PackageReference Include="Microsoft.Build" Version="17.9.5" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+		<PackageReference Include="OneOf" Version="3.0.263" />
+		<PackageReference Include="System.IO.Abstractions" Version="20.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
-		<PackageReference Include="Microsoft.Build" Version="17.8.3" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-		<PackageReference Include="OneOf" Version="3.0.263" />
-		<PackageReference Include="System.IO.Abstractions" Version="20.0.15" />
+	  <ProjectReference Include="..\Core\RonSijm.VSTools.Core.DataContracts\RonSijm.VSTools.Core.DataContracts.csproj" />
+	  <ProjectReference Include="..\Core\RonSijm.VSTools.Core.Logging\RonSijm.VSTools.Core.Logging.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
